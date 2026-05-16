@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | AGSR Sonipat — Aryan Gateways Shooting Range</title>
+  <meta name="description" content="Contact AGSR Sonipat shooting academy. Call, WhatsApp or visit us. Enroll in India's finest NRAI & HRA affiliated shooting range in Sonipat, Haryana." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & ROOT VARIABLES
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --olive:   #3d5a2a;
+      --olive-dk:#2a3f1c;
+      --olive-lt:#567a3a;
+      --black:   #0d0d0d;
+      --dark:    #141414;
+      --card-bg: #1c1c1c;
+      --red:     #e63322;
+      --red-lt:  #ff4433;
+      --gold:    #f5c518;
+      --gold-lt: #ffd740;
+      --white:   #ffffff;
+      --grey:    #aaaaaa;
+      --radius:  12px;
+      --shadow:  0 8px 32px rgba(0,0,0,0.45);
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--olive); border-radius: 3px; }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-family: 'Oswald', sans-serif; font-size: 12px;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; line-height: 1.1; color: var(--white);
+    }
+    .section-title span { color: var(--gold); }
+    .divider { width: 60px; height: 4px; background: var(--red); border-radius: 2px; margin: 20px 0 32px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 4px;
+      font-family: 'Oswald', sans-serif; font-size: 15px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      font-weight: 600; cursor: pointer; border: none;
+      transition: var(--transition);
+    }
+    .btn-primary { background: var(--red); color: var(--white); }
+    .btn-primary:hover { background: var(--red-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,51,34,0.4); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: var(--black); }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,197,24,0.4); }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px; transition: var(--transition);
+    }
+    #navbar.scrolled {
+      background: rgba(13,13,13,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 48px; width: 48px; object-fit: contain; border-radius: 50%; }
+    .nav-logo-text .name { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+    .nav-logo-text .name span { color: var(--gold); }
+    .nav-logo-text .sub { font-size: 10px; letter-spacing: 3px; color: var(--grey); text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-family: 'Oswald', sans-serif; font-size: 14px;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.75); transition: var(--transition); position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--gold); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .nav-wa {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; background: #25D366; border-radius: 4px;
+      font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600;
+      transition: var(--transition);
+    }
+    .nav-wa:hover { background: #20bf5b; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: var(--transition); }
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0;
+      background: rgba(13,13,13,0.98); backdrop-filter: blur(12px);
+      padding: 24px; flex-direction: column; gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08); z-index: 999;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Oswald', sans-serif; font-size: 18px;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.8); padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08); transition: var(--transition);
+    }
+    .mobile-menu a:hover, .mobile-menu a.active { color: var(--gold); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative; min-height: 60vh;
+      display: flex; align-items: center;
+      background: var(--black); overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a2a10 50%, #0d0d0d 100%);
+    }
+    .crosshair-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: flex-end;
+      pointer-events: none; overflow: hidden;
+    }
+    .crosshair-svg {
+      width: 55vw; max-width: 700px; opacity: 0.12;
+      animation: rotateSlow 60s linear infinite;
+      transform-origin: center;
+    }
+    @keyframes rotateSlow { to { transform: rotate(360deg); } }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(13,13,13,1) 40%, rgba(13,13,13,0.2) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 120px 24px 80px; width: 100%;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--grey); margin-bottom: 24px;
+    }
+    .breadcrumb a { color: var(--gold); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.3); }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(61,90,42,0.3); border: 1px solid rgba(61,90,42,0.6);
+      padding: 6px 16px; border-radius: 50px;
+      font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: #8db86a; margin-bottom: 28px;
+    }
+    .hero-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8db86a; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 700; line-height: 1.0; margin-bottom: 8px;
+    }
+    .hero-title .line1 { color: var(--white); }
+    .hero-title .line2 { color: var(--gold); }
+    .hero-tagline {
+      font-family: 'Oswald', sans-serif; font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin: 20px 0 16px;
+    }
+    .hero-tagline span { color: var(--gold); font-weight: 600; }
+    .hero-desc { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.65); max-width: 540px; margin-bottom: 40px; }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ============================================================
+       STATS BAR
+    ============================================================ */
+    #stats {
+      background: var(--olive-dk);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item {
+      padding: 32px 24px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      transition: var(--transition); cursor: default;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:hover { background: rgba(255,255,255,0.05); }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; line-height: 1; color: var(--gold); margin-bottom: 4px; }
+    .stat-label { font-size: 13px; letter-spacing: 1px; color: rgba(255,255,255,0.7); text-transform: uppercase; font-weight: 500; }
+    .stat-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+    /* ============================================================
+       ACTION STRIP
+    ============================================================ */
+    .action-strip {
+      background: #111;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .action-trio { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .act-card {
+      padding: 36px 32px; display: flex; align-items: center; gap: 20px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      transition: background var(--transition); text-decoration: none;
+    }
+    .act-card:last-child { border-right: none; }
+    .act-card:hover { background: rgba(255,255,255,0.03); }
+    .act-icon {
+      width: 54px; height: 54px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0; transition: transform var(--transition);
+    }
+    .act-card:hover .act-icon { transform: scale(1.1); }
+    .act-icon.wa  { background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.2); }
+    .act-icon.ph  { background: rgba(230,51,34,0.12);  border: 1px solid rgba(230,51,34,0.2); }
+    .act-icon.loc { background: rgba(245,197,24,0.1);  border: 1px solid rgba(245,197,24,0.2); }
+    .act-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; font-weight: 600; }
+    .act-value { font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+    .act-sub { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+    .act-arrow { font-size: 20px; color: rgba(255,255,255,0.2); transition: var(--transition); margin-left: auto; }
+    .act-card:hover .act-arrow { color: var(--gold); transform: translateX(4px); }
+
+    /* ============================================================
+       MAIN CONTENT GRID
+    ============================================================ */
+    .main-section { padding: 90px 0; background: var(--dark); }
+    .main-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 52px; align-items: start; }
+
+    /* Info Stack */
+    .info-stack { display: flex; flex-direction: column; gap: 0; }
+    .stack-header { margin-bottom: 40px; }
+    .info-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius); padding: 28px;
+      display: flex; gap: 20px; align-items: flex-start;
+      margin-bottom: 16px; transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .info-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 0; transition: height 0.4s ease;
+    }
+    .info-card.wa-card::before   { background: #25D366; }
+    .info-card.call-card::before { background: var(--red); }
+    .info-card.map-card::before  { background: var(--gold); }
+    .info-card.aff-card::before  { background: var(--olive-lt); }
+    .info-card:hover { transform: translateX(6px); border-color: rgba(255,255,255,0.12); }
+    .info-card:hover::before { height: 100%; }
+    .ic-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .ic-icon.g { background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.18); }
+    .ic-icon.r { background: rgba(230,51,34,0.12);  border: 1px solid rgba(230,51,34,0.18); }
+    .ic-icon.y { background: rgba(245,197,24,0.1);  border: 1px solid rgba(245,197,24,0.15); }
+    .ic-icon.o { background: rgba(61,90,42,0.2);    border: 1px solid rgba(61,90,42,0.3); }
+    .ic-body { flex: 1; }
+    .ic-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+    .ic-value { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .ic-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 16px; }
+    .ic-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .ic-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: 6px;
+      font-family: 'Oswald', sans-serif; font-size: 11px;
+      letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+      transition: var(--transition); cursor: pointer;
+    }
+    .ic-btn.wa   { background: rgba(37,211,102,0.15); color: #25D366; border: 1px solid rgba(37,211,102,0.3); }
+    .ic-btn.wa:hover   { background: #25D366; color: #fff; }
+    .ic-btn.red  { background: rgba(230,51,34,0.15); color: var(--red); border: 1px solid rgba(230,51,34,0.3); }
+    .ic-btn.red:hover  { background: var(--red); color: #fff; }
+    .ic-btn.gold { background: rgba(245,197,24,0.12); color: var(--gold); border: 1px solid rgba(245,197,24,0.25); }
+    .ic-btn.gold:hover { background: var(--gold); color: var(--black); }
+    .response-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; background: rgba(37,211,102,0.08);
+      border: 1px solid rgba(37,211,102,0.2); border-radius: 50px;
+      font-size: 11px; color: #25D366; margin-bottom: 10px;
+    }
+    .rb-dot { width: 5px; height: 5px; border-radius: 50%; background: #25D366; animation: blink 1.5s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    .aff-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .aff-tag {
+      padding: 5px 14px; border-radius: 6px;
+      font-family: 'Oswald', sans-serif; font-size: 12px;
+      letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600;
+    }
+    .aff-tag.nrai { background: rgba(61,90,42,0.25); color: #8db86a; border: 1px solid rgba(61,90,42,0.4); }
+    .aff-tag.hra  { background: rgba(245,197,24,0.12); color: var(--gold); border: 1px solid rgba(245,197,24,0.25); }
+    .aff-tag.issf { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.1); }
+
+    /* Form Card */
+    .form-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius); overflow: hidden; position: sticky; top: 90px;
+    }
+    .form-header {
+      padding: 36px 40px 28px; border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(135deg, rgba(61,90,42,0.15) 0%, transparent 100%);
+    }
+    .form-header-tag {
+      display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+      background: rgba(230,51,34,0.1); border: 1px solid rgba(230,51,34,0.2);
+      border-radius: 50px; font-size: 10px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+    }
+    .form-title { font-family: 'Oswald', sans-serif; font-size: 1.7rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .form-subtitle { font-size: 14px; color: rgba(255,255,255,0.4); }
+    .form-body { padding: 32px 40px 40px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 10px; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
+    .input-wrap { position: relative; }
+    .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; pointer-events: none; opacity: 0.4; }
+    .textarea-wrap .input-icon { top: 16px; transform: none; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 13px 14px 13px 42px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px; color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      transition: var(--transition); outline: none; appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: rgba(61,90,42,0.6); background: rgba(61,90,42,0.08);
+      box-shadow: 0 0 0 3px rgba(61,90,42,0.12);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.18); }
+    .form-group textarea { resize: vertical; min-height: 100px; padding-top: 14px; }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer;
+    }
+    .form-group select option { background: #1c1c1c; }
+    .form-progress { display: flex; gap: 6px; margin-bottom: 24px; }
+    .fp-step { height: 3px; border-radius: 3px; flex: 1; background: rgba(255,255,255,0.08); transition: background 0.4s ease; }
+    .fp-step.active { background: var(--olive-lt); }
+    .fp-step.done   { background: var(--gold); }
+    .form-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 20px 0; }
+    .privacy-note {
+      display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px; margin-bottom: 20px;
+    }
+    .privacy-note .pn-icon { font-size: 14px; flex-shrink: 0; opacity: 0.7; }
+    .privacy-note p { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.6; }
+    .privacy-note strong { color: var(--gold); }
+    .submit-btn {
+      width: 100%; padding: 17px;
+      background: linear-gradient(135deg, var(--red) 0%, #c22b1c 100%);
+      color: var(--white); border: none; border-radius: 8px;
+      font-family: 'Oswald', sans-serif; font-size: 15px;
+      letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700;
+      cursor: pointer; transition: var(--transition);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .submit-btn:hover { background: linear-gradient(135deg, var(--red-lt) 0%, var(--red) 100%); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(230,51,34,0.45); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .form-success { display: none; text-align: center; padding: 60px 40px; }
+    .success-ring {
+      width: 90px; height: 90px; border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px; position: relative;
+      animation: success-pulse 2s ease-in-out infinite;
+    }
+    .success-ring::before { content: ''; position: absolute; inset: 8px; border-radius: 50%; background: rgba(37,211,102,0.08); }
+    .success-check { font-size: 36px; position: relative; z-index: 1; }
+    @keyframes success-pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.2); }
+      50%      { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+    }
+    .success-title { font-family: 'Oswald', sans-serif; font-size: 1.6rem; color: var(--white); margin-bottom: 10px; }
+    .success-text { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 28px; }
+
+    /* ============================================================
+       MAP SECTION
+    ============================================================ */
+    .map-section { padding: 90px 0; background: var(--black); }
+    .section-head { text-align: center; margin-bottom: 48px; }
+    .section-head .divider { margin: 20px auto 0; }
+    .map-container { border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,255,255,0.07); position: relative; }
+    .map-inner {
+      position: relative; height: 400px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(61,90,42,0.15) 0%, transparent 70%), linear-gradient(135deg, #141414 0%, #111 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .map-grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .map-pin-wrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .map-pin-anim { font-size: 52px; animation: pin-bounce 2s ease-in-out infinite; filter: drop-shadow(0 8px 24px rgba(230,51,34,0.4)); }
+    @keyframes pin-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .map-pin-shadow { width: 40px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.4); animation: shadow-shrink 2s ease-in-out infinite; }
+    @keyframes shadow-shrink { 0%,100%{transform:scaleX(1);opacity:0.6} 50%{transform:scaleX(0.6);opacity:0.3} }
+    .map-info-block { position: relative; z-index: 2; text-align: center; }
+    .map-info-block h4 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; color: var(--white); margin-bottom: 8px; }
+    .map-info-block p { font-size: 13px; color: rgba(255,255,255,0.4); max-width: 320px; line-height: 1.6; margin-bottom: 20px; }
+    .map-badge {
+      position: absolute; top: 20px; right: 20px; z-index: 3;
+      padding: 8px 16px; background: rgba(0,0,0,0.75); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+      font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 1px;
+      text-transform: uppercase; color: rgba(255,255,255,0.6);
+    }
+
+    /* ============================================================
+       BATCH TIMINGS
+    ============================================================ */
+    .batches-section { padding: 90px 0; background: var(--dark); }
+    .batch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .batch-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius); padding: 28px 24px;
+      transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .batch-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: transparent; transition: background var(--transition); }
+    .batch-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.12); box-shadow: var(--shadow); }
+    .batch-card:hover::after { background: var(--gold); }
+    .batch-card.custom-card { background: linear-gradient(135deg, rgba(61,90,42,0.2) 0%, rgba(61,90,42,0.06) 100%); border-color: rgba(61,90,42,0.35); }
+    .bc-emoji { font-size: 30px; margin-bottom: 16px; }
+    .bc-name { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .bc-time { font-size: 1.2rem; font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 5px; }
+    .bc-days { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+    .bc-badge { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .bc-open   { background: rgba(61,90,42,0.2);   color: #8db86a; border: 1px solid rgba(61,90,42,0.35); }
+    .bc-full   { background: rgba(245,197,24,0.1); color: var(--gold); border: 1px solid rgba(245,197,24,0.25); }
+    .bc-wa-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 18px; border-radius: 6px; background: #25D366; color: #fff;
+      font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 1.5px;
+      text-transform: uppercase; font-weight: 700; transition: var(--transition);
+    }
+    .bc-wa-btn:hover { background: #20bf5a; transform: translateY(-2px); }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq-section { padding: 90px 0; background: var(--black); }
+    .faq-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .faq-item {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition);
+    }
+    .faq-item:hover { border-color: rgba(255,255,255,0.12); }
+    .faq-item.open  { border-color: rgba(61,90,42,0.4); }
+    .faq-q {
+      width: 100%; padding: 22px 24px; background: none; border: none; cursor: pointer;
+      text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    .faq-q-text { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.4; transition: color var(--transition); }
+    .faq-item.open .faq-q-text { color: var(--gold); }
+    .faq-chevron {
+      width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: rgba(255,255,255,0.4); transition: all var(--transition);
+    }
+    .faq-item.open .faq-chevron { background: rgba(61,90,42,0.25); color: var(--gold); transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-a.open { max-height: 260px; }
+    .faq-a-inner { padding: 16px 24px 20px; font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.8; border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* ============================================================
+       BOTTOM CTA
+    ============================================================ */
+    .cta-strip {
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(61,90,42,0.18) 0%, rgba(0,0,0,0) 100%);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+    .cta-strip h2 { font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--white); margin-bottom: 14px; }
+    .cta-strip p { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer { background: #080808; border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 60px; }
+    .footer-brand .logo-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-brand .logo-wrap img { height: 52px; width: 52px; object-fit: contain; border-radius: 50%; }
+    .footer-brand .logo-name { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; line-height: 1.2; }
+    .footer-brand .logo-name span { color: var(--gold); }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; margin-bottom: 24px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social-btn { width: 38px; height: 38px; background: rgba(255,255,255,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: var(--transition); }
+    .footer-social-btn:hover { background: var(--olive); }
+    .footer-col h4 { font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.45); transition: var(--transition); }
+    .footer-col ul li a:hover { color: var(--white); padding-left: 4px; }
+    .footer-col .fc-info { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+    .footer-col .fc-info strong { color: rgba(255,255,255,0.7); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .footer-bottom .affil { display: flex; align-items: center; gap: 16px; }
+    .affil-badge { padding: 4px 12px; border-radius: 50px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+
+    /* ============================================================
+       WHATSAPP FLOAT
+    ============================================================ */
+    .wa-float {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 60px; height: 60px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.45); transition: var(--transition);
+      animation: waPulse 3s infinite;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,0.6); animation: none; }
+    @keyframes waPulse {
+      0%,100%{box-shadow:0 8px 24px rgba(37,211,102,0.45)}
+      50%{box-shadow:0 8px 32px rgba(37,211,102,0.7),0 0 0 8px rgba(37,211,102,0.15)}
+    }
+    .wa-tooltip {
+      position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+      background: #0d0d0d; color: white; padding: 8px 14px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; white-space: nowrap;
+      box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: var(--transition);
+    }
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+    .d1{transition-delay:0.05s} .d2{transition-delay:0.12s} .d3{transition-delay:0.19s}
+    .d4{transition-delay:0.26s} .d5{transition-delay:0.33s} .d6{transition-delay:0.40s}
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .form-card { position: static; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .action-trio { grid-template-columns: 1fr; }
+      .act-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .act-card:last-child { border-bottom: none; }
+      .batch-grid { grid-template-columns: repeat(2, 1fr); }
+      .faq-columns { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-body { padding: 24px; }
+      .form-header { padding: 28px 24px 22px; }
+      .batch-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.5rem; }
+      .hero-buttons { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'" />
+      <div class="nav-logo-text">
+        <div class="name"><span>AG</span>SR Sonipat</div>
+        <div class="sub">Shooting Academy</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="offer.html">Our Offer</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Enroll Now</a>
+      <a href="https://wa.me/919306521724" target="_blank" class="nav-wa">
+        <span>💬</span> WhatsApp
+      </a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" onclick="toggleMenu()">About Us</a>
+  <a href="offer.html" onclick="toggleMenu()">Our Offer</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" class="active" onclick="toggleMenu()">Contact Us</a>
+  <a href="https://wa.me/919306521724" target="_blank">💬 WhatsApp Us</a>
+</div>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="crosshair-bg">
+    <svg class="crosshair-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="250" cy="250" r="240" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="190" fill="none" stroke="#e63322" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="140" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="90"  fill="none" stroke="#e63322" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="40"  fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <line x1="250" y1="0" x2="250" y2="500" stroke="#ffffff" stroke-width="1.5"/>
+      <line x1="0" y1="250" x2="500" y2="250" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="8" fill="#e63322"/>
+      <line x1="250" y1="5"   x2="250" y2="20"  stroke="#ffffff" stroke-width="2"/>
+      <line x1="250" y1="480" x2="250" y2="495" stroke="#ffffff" stroke-width="2"/>
+      <line x1="5"   y1="250" x2="20"  y2="250" stroke="#ffffff" stroke-width="2"/>
+      <line x1="480" y1="250" x2="495" y2="250" stroke="#ffffff" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📞 We're Available Daily 5AM – 9PM</div>
+    <h1 class="hero-title">
+      <div class="line1">GET IN</div>
+      <div class="line2">Touch With Us</div>
+    </h1>
+    <p class="hero-tagline">Start Your Journey · <span>Today</span></p>
+    <p class="hero-desc">
+      Whether you're a complete beginner or an elite competitor — AGSR is where champions are built. Drop us a message, call directly, or visit the range in Sonipat, Haryana.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/919306521724?text=Hi%20AGSR%2C%20I%27m%20interested%20in%20joining%20your%20shooting%20academy.%20Please%20share%20details." target="_blank" class="btn btn-primary">💬 WhatsApp Us</a>
+      <a href="tel:+919306521724" class="btn btn-outline">📞 +91 93065 21724</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+============================================================ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num">9+</div>
+      <div class="stat-label">Years Experience</div>
+      <div class="stat-sub">Est. 2016</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Shooters Trained</div>
+      <div class="stat-sub">And Counting</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">NRAI</div>
+      <div class="stat-label">Affiliated</div>
+      <div class="stat-sub">Nationally Recognised</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">ISSF</div>
+      <div class="stat-label">Standard Range</div>
+      <div class="stat-sub">Olympic Level</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUICK ACTION STRIP
+============================================================ -->
+<div class="action-strip">
+  <div class="action-trio">
+    <a href="https://wa.me/919306521724?text=Hi%20AGSR%2C%20I%27m%20interested%20in%20joining%20your%20shooting%20academy!" target="_blank" class="act-card">
+      <div class="act-icon wa">💬</div>
+      <div>
+        <div class="act-label">WhatsApp</div>
+        <div class="act-value">+91 93065 21724</div>
+        <div class="act-sub">Reply within 30 mins</div>
+      </div>
+      <div class="act-arrow">→</div>
+    </a>
+    <a href="tel:+919306521724" class="act-card">
+      <div class="act-icon ph">📞</div>
+      <div>
+        <div class="act-label">Call Direct</div>
+        <div class="act-value">+91 93065 21724</div>
+        <div class="act-sub">Mon – Sun &nbsp;|&nbsp; 5 AM – 9 PM</div>
+      </div>
+      <div class="act-arrow">→</div>
+    </a>
+    <a href="https://maps.google.com/?q=Sonipat+Haryana+Shooting+Range" target="_blank" class="act-card">
+      <div class="act-icon loc">📍</div>
+      <div>
+        <div class="act-label">Visit Us</div>
+        <div class="act-value">Sonipat, Haryana</div>
+        <div class="act-sub">Exact location on enrollment</div>
+      </div>
+      <div class="act-arrow">→</div>
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN CONTENT GRID
+============================================================ -->
+<section class="main-section">
+  <div class="container">
+    <div class="main-grid">
+
+      <!-- LEFT: INFO STACK -->
+      <div class="info-stack">
+        <div class="stack-header reveal">
+          <div class="section-label">Contact Information</div>
+          <h2 class="section-title">Get in <span>Touch</span></h2>
+          <div class="divider"></div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.8;max-width:420px">
+            We're just a message away. Pick the channel that works best for you — WhatsApp is the fastest.
+          </p>
+        </div>
+
+        <div class="info-card wa-card reveal d1">
+          <div class="ic-icon g">💬</div>
+          <div class="ic-body">
+            <div class="ic-label">WhatsApp</div>
+            <div class="response-badge"><span class="rb-dot"></span> Fastest — usually within 30 minutes</div>
+            <div class="ic-value">+91 93065 21724</div>
+            <div class="ic-sub">Drop a message anytime — we'll respond promptly with all the details you need.</div>
+            <div class="ic-btns">
+              <a href="https://wa.me/919306521724?text=Hi%20AGSR%2C%20I%27m%20interested%20in%20joining%20your%20shooting%20academy.%20Please%20share%20details." target="_blank" class="ic-btn wa">💬 WhatsApp Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card call-card reveal d2">
+          <div class="ic-icon r">📞</div>
+          <div class="ic-body">
+            <div class="ic-label">Call Us</div>
+            <div class="ic-value">+91 93065 21724</div>
+            <div class="ic-sub">Monday to Sunday &nbsp;|&nbsp; 5:00 AM – 9:00 PM. Speak directly with our coaching team.</div>
+            <div class="ic-btns">
+              <a href="tel:+919306521724" class="ic-btn red">📞 Call Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card map-card reveal d3">
+          <div class="ic-icon y">📍</div>
+          <div class="ic-body">
+            <div class="ic-label">Our Range</div>
+            <div class="ic-value">Sonipat, Haryana</div>
+            <div class="ic-sub">ISSF-standard 10m air pistol &amp; rifle range. Exact address shared with enrolled members.</div>
+            <div class="ic-btns">
+              <a href="https://maps.google.com/?q=Sonipat+Haryana+Shooting+Academy" target="_blank" class="ic-btn gold">🗺 Get Directions</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card aff-card reveal d4">
+          <div class="ic-icon o">🏆</div>
+          <div class="ic-body">
+            <div class="ic-label">Affiliations & Standards</div>
+            <div class="ic-value">NRAI &amp; HRA Affiliated</div>
+            <div class="ic-sub">9+ years coaching experience. ISSF standard range infrastructure.</div>
+            <div class="aff-tags">
+              <span class="aff-tag nrai">NRAI</span>
+              <span class="aff-tag hra">HRA</span>
+              <span class="aff-tag issf">ISSF Standard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="form-card reveal">
+        <div class="form-header">
+          <div class="form-header-tag">🎯 Free Consultation</div>
+          <div class="form-title">Send Your Enquiry</div>
+          <div class="form-subtitle">We'll reach out within 24 hours — usually much sooner.</div>
+        </div>
+        <div class="form-body">
+          <div id="formWrap">
+            <div class="form-progress" id="formProgress">
+              <div class="fp-step" id="step1"></div>
+              <div class="fp-step" id="step2"></div>
+              <div class="fp-step" id="step3"></div>
+            </div>
+            <form id="enquiryForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-name">Full Name *</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="f-name" placeholder="Your full name" required autocomplete="name"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="f-phone">Phone / WhatsApp *</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">📱</span>
+                    <input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX" required autocomplete="tel"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-age">Age</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">🎂</span>
+                    <input type="number" id="f-age" placeholder="e.g. 16" min="8" max="80"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="f-disc">Discipline</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">🎯</span>
+                    <select id="f-disc">
+                      <option value="">— Select —</option>
+                      <option value="10m-air-pistol">10m Air Pistol</option>
+                      <option value="10m-air-rifle">10m Air Rifle</option>
+                      <option value="25m-pistol">25m Pistol</option>
+                      <option value="50m-free-pistol">50m Free Pistol</option>
+                      <option value="not-sure">Not Sure Yet</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="f-level">Experience Level</label>
+                <div class="input-wrap">
+                  <span class="input-icon">📊</span>
+                  <select id="f-level">
+                    <option value="">— Select —</option>
+                    <option value="beginner">Beginner — Never shot before</option>
+                    <option value="some-exp">Some Experience — Shot occasionally</option>
+                    <option value="club-level">Club Level — Train regularly</option>
+                    <option value="competitive">Competitive — Participate in tournaments</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="f-batch">Preferred Batch</label>
+                <div class="input-wrap">
+                  <span class="input-icon">⏰</span>
+                  <select id="f-batch">
+                    <option value="">— Select —</option>
+                    <option value="morning">Morning (5 AM – 8 AM)</option>
+                    <option value="afternoon">Afternoon (12 PM – 3 PM)</option>
+                    <option value="evening">Evening (4 PM – 7 PM)</option>
+                    <option value="weekend">Weekend Only</option>
+                    <option value="flexible">Flexible / Discuss</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="f-msg">Message (Optional)</label>
+                <div class="input-wrap textarea-wrap">
+                  <span class="input-icon">✍️</span>
+                  <textarea id="f-msg" placeholder="Tell us your goals, questions, or anything else..."></textarea>
+                </div>
+              </div>
+              <hr class="form-divider"/>
+              <div class="privacy-note">
+                <span class="pn-icon">🔒</span>
+                <p><strong>Privacy guaranteed.</strong> Your information is never shared with third parties. We only use it to follow up on your enquiry.</p>
+              </div>
+              <button type="submit" class="submit-btn" id="submitBtn">
+                <span id="btnText">🎯&nbsp; Send My Enquiry</span>
+                <span id="btnSpinner" style="display:none">⏳&nbsp; Sending…</span>
+              </button>
+            </form>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <div class="success-ring">
+              <span class="success-check">✅</span>
+            </div>
+            <div class="success-title">Enquiry Received!</div>
+            <p class="success-text">
+              Thanks, <strong id="successName" style="color:var(--gold)"></strong>!<br/>
+              Our team will reach out within 24 hours.<br/>
+              For an even faster response, drop us a WhatsApp.
+            </p>
+            <a href="https://wa.me/919306521724?text=Hi%20AGSR%2C%20I%20just%20submitted%20an%20enquiry%20on%20your%20website.%20Please%20confirm."
+               target="_blank" class="ic-btn wa" style="display:inline-flex;padding:12px 28px;font-size:13px">
+              💬 &nbsp;Continue on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MAP SECTION
+============================================================ -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Find Us</div>
+      <h2 class="section-title">Visit the <span>Range</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="map-container reveal">
+      <div class="map-inner">
+        <div class="map-grid-bg"></div>
+        <div class="map-badge">📍 Sonipat, Haryana</div>
+        <div class="map-pin-wrap">
+          <div class="map-pin-anim">📍</div>
+          <div class="map-pin-shadow"></div>
+          <div class="map-info-block">
+            <h4>AGSR Shooting Range — Sonipat, Haryana</h4>
+            <p>Exact address is shared with enrolled members. Contact us to get precise directions to the range.</p>
+            <a href="https://maps.google.com/?q=Sonipat+Haryana+Shooting+Academy" target="_blank" class="btn btn-gold" style="display:inline-flex;margin:0 auto">🗺 &nbsp;Open Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Quick Answers</div>
+      <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="faq-columns">
+      <div class="faq-item reveal d1">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do I need my own equipment to join?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">No! AGSR provides 5 free pistols for beginner shooters. You don't need to purchase any equipment to start training. Equipment can be discussed once you decide to take the sport seriously.</div></div>
+      </div>
+      <div class="faq-item reveal d2">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What is the minimum age to join?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">As per NRAI guidelines, training starts from age 8 for introductory sessions. Competitive enrollment for official events typically begins at age 12–14. All age groups are welcome.</div></div>
+      </div>
+      <div class="faq-item reveal d3">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Is shooting budget-friendly for beginners?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Air pistol &amp; rifle at the 10m level is one of the most affordable Olympic sports in India. AGSR provides all equipment for beginners — try before you invest.</div></div>
+      </div>
+      <div class="faq-item reveal d4">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How long to reach competitive level?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">With consistent practice, most dedicated shooters are competition-ready within 6–12 months for district-level events. National-level readiness typically takes 2–3 years of structured training.</div></div>
+      </div>
+      <div class="faq-item reveal d5">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Are women shooters welcome at AGSR?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. We actively encourage female shooters. India's best Olympic results have come from women's shooting. AGSR offers women-friendly batches and a safe training environment.</div></div>
+      </div>
+      <div class="faq-item reveal d6">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What is the fee structure?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Fees vary by discipline, level, and batch. We keep our fees among the most affordable in Haryana with full transparency — no hidden charges. WhatsApp or call us for the current fee schedule.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BOTTOM CTA
+============================================================ -->
+<section class="cta-strip reveal">
+  <div class="container">
+    <div class="section-label">Ready to Begin?</div>
+    <h2>Take Your First <span style="color:var(--gold)">Shot</span> Today</h2>
+    <p>Join AGSR Sonipat — where every champion starts with a single trigger pull.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/919306521724?text=Hi%20AGSR%2C%20I%27m%20ready%20to%20enroll!%20Please%20share%20the%20details." target="_blank" class="btn btn-gold">💬 Enroll via WhatsApp</a>
+      <a href="tel:+919306521724" class="btn btn-outline">📞 Call Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'" />
+          <div class="logo-name"><span>AG</span>SR Sonipat<br><small style="font-size:12px;color:var(--grey);font-weight:400;letter-spacing:2px">SHOOTING RANGE</small></div>
+        </div>
+        <p>Aryan Gateways Shooting Range — Sonipat's premier shooting academy delivering ISSF-standard Olympic training since 2016. Making shooting accessible and affordable for everyone.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/919306521724" target="_blank" class="footer-social-btn" title="WhatsApp">💬</a>
+          <a href="tel:+919306521724" class="footer-social-btn" title="Call">📞</a>
+          <a href="mailto:agsr.sonipat@gmail.com" class="footer-social-btn" title="Email">✉️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="offer.html">Our Offer</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Disciplines</h4>
+        <ul>
+          <li><a href="offer.html">10m Air Pistol</a></li>
+          <li><a href="offer.html">10m Air Rifle</a></li>
+          <li><a href="offer.html">25m Pistol</a></li>
+          <li><a href="offer.html">50m Free Pistol</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="fc-info">
+          <strong>📞 Call / WhatsApp</strong><br>
+          +91 93065 21724<br><br>
+          <strong>📍 Location</strong><br>
+          Sonipat, Haryana<br>India<br><br>
+          <strong>🕐 Hours</strong><br>
+          Open Daily<br>Morning &amp; Evening Batches
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Aryan Gateways Shooting Range, Sonipat. All rights reserved.</p>
+      <div class="affil">
+        <span class="affil-badge">NRAI Affiliated</span>
+        <span class="affil-badge">Haryana Rifle Assoc.</span>
+        <span class="affil-badge">ISSF Standard</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919306521724?text=Hi%20AGSR!%20I%20want%20to%20know%20more%20about%20joining%20your%20shooting%20academy." target="_blank" class="wa-float">
+  💬
+  <span class="wa-tooltip">Chat with us!</span>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  /* ── Navbar scroll ── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  /* ── Mobile menu ── */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  document.addEventListener('click', e => {
+    const menu = document.getElementById('mobileMenu');
+    const ham  = document.querySelector('.hamburger');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !ham.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  /* ── Scroll reveal ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+  /* ── Counter animation ── */
+  function animateCounter(el, target, suffix = '') {
+    let start = 0;
+    const duration = 1800;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-num').forEach(el => {
+          const val = parseInt(el.textContent);
+          if (!isNaN(val)) animateCounter(el, val, el.textContent.includes('+') ? '+' : '');
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsSection = document.getElementById('stats');
+  if (statsSection) statsObserver.observe(statsSection);
+
+  /* ── FAQ accordion ── */
+  function toggleFaq(btn) {
+    const item   = btn.closest('.faq-item');
+    const answer = btn.nextElementSibling;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').classList.remove('open');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  /* ── Form progress ── */
+  function updateProgress() {
+    const name  = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const disc  = document.getElementById('f-disc').value;
+    document.getElementById('step1').className = 'fp-step' + (name || phone ? ' done' : '');
+    document.getElementById('step2').className = 'fp-step' + (name && phone ? ' done' : (name || phone ? ' active' : ''));
+    document.getElementById('step3').className = 'fp-step' + (name && phone && disc ? ' done' : (name && phone ? ' active' : ''));
+  }
+  document.querySelectorAll('#enquiryForm input, #enquiryForm select, #enquiryForm textarea')
+    .forEach(el => el.addEventListener('input', updateProgress));
+
+  /* ── Form submit ── */
+  document.getElementById('enquiryForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name    = document.getElementById('f-name').value.trim();
+    const phone   = document.getElementById('f-phone').value.trim();
+    const age     = document.getElementById('f-age').value;
+    const disc    = document.getElementById('f-disc').value;
+    const level   = document.getElementById('f-level').value;
+    const batch   = document.getElementById('f-batch').value;
+    const message = document.getElementById('f-msg').value.trim();
+
+    if (!name || !phone) {
+      ['f-name','f-phone'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          el.style.borderColor = 'var(--red)';
+          el.style.boxShadow   = '0 0 0 3px rgba(230,51,34,0.15)';
+          setTimeout(() => { el.style.borderColor = ''; el.style.boxShadow = ''; }, 2000);
+        }
+      });
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    document.getElementById('btnText').style.display    = 'none';
+    document.getElementById('btnSpinner').style.display = 'inline';
+    btn.disabled = true;
+
+    try {
+      await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, age, discipline: disc + (level ? ' | ' + level : '') + (batch ? ' | Batch: ' + batch : ''), message })
+      });
+    } catch (_) {}
+
+    document.getElementById('formWrap').style.display    = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    document.getElementById('successName').textContent   = name;
+
+    const msg = `Hi AGSR, I'm ${name} (${phone}). I just submitted an enquiry for ${disc || 'shooting training'}${batch ? ' — preferred batch: ' + batch : ''}. Please confirm.`;
+    setTimeout(() => window.open('https://wa.me/919306521724?text=' + encodeURIComponent(msg), '_blank'), 1400);
+  });
+</script>
+
+</body>
+</html>

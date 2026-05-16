@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | AGSR Sonipat — Aryan Gateways Shooting Range</title>
+  <meta name="description" content="Learn about Aryan Gateways Shooting Range Sonipat — 9 years of excellence, NRAI-affiliated, ISSF-standard shooting academy in Haryana. Affordable, equipment provided for beginners."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    /* ── Page-specific styles ── */
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--dark); }
+    section:nth-child(odd)  { background: var(--black); }
+
+    /* Tabs */
+    .tabs-nav {
+      display: flex; gap: 0; border-bottom: 2px solid rgba(255,255,255,0.08);
+      margin-bottom: 48px;
+    }
+    .tab-btn {
+      padding: 16px 36px; font-family: 'Oswald', sans-serif;
+      font-size: 15px; letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); cursor: pointer; border: none;
+      background: transparent; border-bottom: 3px solid transparent;
+      margin-bottom: -2px; transition: var(--transition);
+    }
+    .tab-btn:hover { color: var(--white); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; animation: fadeUp 0.4s ease; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+
+    /* About grid */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: start; }
+    .about-logo-box {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius); padding: 40px;
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+      position: sticky; top: 90px;
+    }
+    .about-logo-box img { width: 100%; height: 260px; object-fit: cover; border-radius: 10px; }
+    .about-logo-box .tagline {
+      font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+      text-align: center;
+    }
+    .affil-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }
+    .affil-b {
+      padding: 5px 14px; border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.55);
+      font-weight: 600; text-transform: uppercase;
+    }
+
+    /* Body text */
+    .about-desc { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
+
+    /* Myth buster */
+    .myth-box {
+      background: linear-gradient(135deg, rgba(230,51,34,0.1), rgba(230,51,34,0.05));
+      border: 1px solid rgba(230,51,34,0.3); border-left: 4px solid var(--red);
+      border-radius: var(--radius); padding: 28px 28px 28px 28px; margin: 32px 0;
+    }
+    .myth-box .myth-title {
+      font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700;
+      color: var(--red); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .myth-box p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); }
+    .myth-box p strong { color: var(--gold); }
+
+    /* Equipment box */
+    .equip-box {
+      background: linear-gradient(135deg, rgba(61,90,42,0.2), rgba(61,90,42,0.08));
+      border: 1px solid rgba(61,90,42,0.4); border-left: 4px solid var(--olive);
+      border-radius: var(--radius); padding: 24px; margin: 24px 0;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .equip-icon { font-size: 32px; flex-shrink: 0; }
+    .equip-box h4 { font-family: 'Oswald', sans-serif; font-size: 16px; color: var(--gold); margin-bottom: 6px; }
+    .equip-box p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.65); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--olive), rgba(61,90,42,0.1));
+    }
+    .tl-item { position: relative; padding-bottom: 36px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -28px; top: 4px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--olive); border: 3px solid var(--black);
+      box-shadow: 0 0 0 3px var(--olive);
+    }
+    .tl-year { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+    .tl-title { font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .tl-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* Mission values */
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
+    .value-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius); padding: 28px 24px; text-align: center;
+      transition: var(--transition);
+    }
+    .value-card:hover { border-color: rgba(245,197,24,0.3); transform: translateY(-4px); }
+    .value-icon { font-size: 36px; margin-bottom: 16px; }
+    .value-card h3 { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+    .value-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* Features list */
+    .feat-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+    .feat-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 16px;
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px; transition: var(--transition);
+    }
+    .feat-item:hover { border-color: rgba(61,90,42,0.4); }
+    .feat-item .fi { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .feat-item h4 { font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
+    .feat-item p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+    /* CTA section */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--olive-dk), var(--black));
+      border-top: 1px solid rgba(61,90,42,0.3); padding: 60px 0;
+    }
+    .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .cta-inner h2 { font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; }
+    .cta-inner h2 span { color: var(--gold); }
+    .cta-inner p { font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 8px; }
+    .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+
+    /* Hero pistol image */
+    .hero-pistol-wrap {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-pistol-wrap img {
+      width: 100%;
+      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(61,90,42,0.4));
+    }
+    .hero-pistol-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(13,13,13,0.5) 100%);
+      z-index: 1;
+    }
+    @media (max-width: 1024px) { .hero-pistol-wrap { display: none; } }
+
+    /* Pulse dot */
+    .pulse-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: #8db86a; animation: pulse 2s infinite; margin-right: 6px; vertical-align: middle;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-logo-box { position: static; }
+    }
+    @media (max-width: 768px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .feat-list { grid-template-columns: 1fr; }
+      .tab-btn { padding: 12px 20px; font-size: 13px; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .cta-btns { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'"/>
+      <div class="nav-logo-text">
+        <div class="name"><span>AG</span>SR Sonipat</div>
+        <div class="sub">Shooting Academy</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="offer.html">Our Offer</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="https://wa.me/919306521724" target="_blank" class="nav-wa">💬 WhatsApp</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" class="active" onclick="toggleMenu()">About Us</a>
+  <a href="offer.html" onclick="toggleMenu()">Our Offer</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  <a href="https://wa.me/919306521724" target="_blank">💬 WhatsApp Us</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <svg class="page-hero-crosshair" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="150" r="140" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="100" fill="none" stroke="#e63322" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="60" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="20" fill="none" stroke="#e63322" stroke-width="1.5"/>
+    <line x1="150" y1="0" x2="150" y2="300" stroke="#fff" stroke-width="1.5"/>
+    <line x1="0" y1="150" x2="300" y2="150" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="5" fill="#e63322"/>
+  </svg>
+  <div class="hero-pistol-wrap">
+    <img src="Agsr logo/be8d6675-ea06-429b-abb2-605680f09e2e.jpg" alt="Competition Air Pistol" />
+  </div>
+  <div class="page-hero-content">
+    <h1>About <span>AGSR</span> Sonipat</h1>
+    <p>9 years of shaping champions. A NRAI-affiliated, ISSF-standard shooting academy making competitive shooting accessible to every student in Haryana.</p>
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="#about-tabs" class="btn btn-primary">Our Story 🎯</a>
+      <a href="contact.html" class="btn btn-outline">Join the Academy</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-strip-grid">
+    <div class="stat-item reveal"><div class="stat-num">9+</div><div class="stat-label">Years Experience</div><div class="stat-sub">Est. 2016</div></div>
+    <div class="stat-item reveal"><div class="stat-num">2</div><div class="stat-label">Electronic Targets</div><div class="stat-sub">ISSF Standard</div></div>
+    <div class="stat-item reveal"><div class="stat-num">5</div><div class="stat-label">Free Pistols</div><div class="stat-sub">For Beginners</div></div>
+    <div class="stat-item reveal"><div class="stat-num">100%</div><div class="stat-label">Budget Friendly</div><div class="stat-sub">Most affordable in Haryana</div></div>
+  </div>
+</div>
+
+<!-- ABOUT TABS -->
+<section id="about-tabs" style="background:var(--dark)">
+  <div class="container">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('tab-about', this)">🎯 About AGSR</button>
+      <button class="tab-btn" onclick="switchTab('tab-mission', this)">🏆 Our Mission</button>
+    </div>
+
+    <!-- TAB 1: ABOUT AGSR -->
+    <div class="tab-pane active" id="tab-about">
+      <div class="about-grid">
+        <div class="about-logo-box reveal-left">
+          <img src="range.jpg" alt="AGSR Shooting Range" onerror="this.style.display='none'"/>
+          <div class="tagline">"Aim with Purpose<br>Shoot with Perfection"</div>
+          <div class="affil-badges">
+            <span class="affil-b">NRAI</span>
+            <span class="affil-b">ISSF</span>
+            <span class="affil-b">HRA</span>
+            <span class="affil-b">Olympic Events</span>
+          </div>
+          <a href="contact.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;margin-top:8px">Join Now 🎯</a>
+        </div>
+        <div class="reveal-right">
+          <p class="section-label">Est. 2016 · Sonipat, Haryana</p>
+          <h2 class="section-title">Aryan Gateways <span>Shooting Range</span></h2>
+          <div class="divider"></div>
+          <p class="about-desc">Aryan Gateways Shooting Range (AGSR) Sonipat is one of Haryana's premier and most trusted shooting academies. Founded in 2016 with a vision to make competitive shooting accessible to everyone, we have spent over 9 years producing district, state, and national-level champions from the Sonipat region.</p>
+          <p class="about-desc">We are officially affiliated with the <strong style="color:var(--white)">National Rifle Association of India (NRAI)</strong> and the <strong style="color:var(--white)">Haryana Rifle Association (HRA)</strong>, and all our training follows strict <strong style="color:var(--white)">ISSF (International Shooting Sport Federation)</strong> standards — the same rules used at the Olympic Games.</p>
+          <p class="about-desc">Our modern indoor range features <strong style="color:var(--gold)">2 electronic target machines</strong> that deliver real-time decimal scoring, matching competition conditions exactly. We train students in three Olympic disciplines: 10m Air Pistol/Rifle, 25m Pistol, and 50m Free Pistol.</p>
+          <div class="feat-list">
+            <div class="feat-item"><div class="fi">🏛️</div><div><h4>NRAI Affiliated</h4><p>Nationally recognized academy — your achievements count everywhere</p></div></div>
+            <div class="feat-item"><div class="fi">🖥️</div><div><h4>Electronic Targets</h4><p>2 digital scoring machines for real-time competition-grade feedback</p></div></div>
+            <div class="feat-item"><div class="fi">🎯</div><div><h4>3 Olympic Events</h4><p>10m, 25m, 50m disciplines — full Olympic competition pathway</p></div></div>
+            <div class="feat-item"><div class="fi">📍</div><div><h4>Sonipat, Haryana</h4><p>Easily accessible, serving students from Sonipat, Panipat & NCR</p></div></div>
+          </div>
+          <div class="myth-box">
+            <div class="myth-title">🚫 Busting the Myth About Cost</div>
+            <p>Many Indian parents believe shooting sport is prohibitively expensive. <strong>This is completely false.</strong> At AGSR Sonipat, <strong>beginner shooters don't need to buy any pistol</strong>. We provide 5 academy air pistols absolutely free for training. Your child can start competing without any equipment investment. Shooting is <strong>as affordable as cricket or badminton.</strong></p>
+          </div>
+          <div class="equip-box">
+            <div class="equip-icon">🔫</div>
+            <div>
+              <h4>5 Pistols Available Free for Beginners</h4>
+              <p>Walk in on Day 1 with zero equipment. Our 5 academy air pistols are available at no charge for all beginners and intermediate students. You only need to consider your own pistol once you reach the competitive level — and even then, we guide you on the most affordable options.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: OUR MISSION -->
+    <div class="tab-pane" id="tab-mission">
+      <p class="section-label" style="text-align:center">What Drives Us</p>
+      <h2 class="section-title" style="text-align:center;margin-bottom:8px">Our <span>Mission</span> & Vision</h2>
+      <div class="divider" style="margin:20px auto 40px"></div>
+      <p style="font-size:16px;line-height:1.8;color:rgba(255,255,255,0.65);max-width:720px;margin:0 auto 48px;text-align:center">
+        At AGSR Sonipat, our mission is to democratize competitive shooting in Haryana — making it accessible, affordable, and aspirational for every student, regardless of their background or financial situation.
+      </p>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-icon">🎯</div>
+          <h3>Precision in Training</h3>
+          <p>We follow ISSF competition standards in every session. What you practice here is exactly what you face in district, state, and national championships.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">💰</div>
+          <h3>Radical Affordability</h3>
+          <p>Shooting is NOT expensive. We have eliminated the biggest barrier to entry — equipment cost — by providing 5 free pistols. Our fees are the lowest in Haryana for this quality.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🏆</div>
+          <h3>Champion Mindset</h3>
+          <p>We don't just train shooters — we build champions. Every student is coached with the goal of representing Haryana and India at state and national competitions.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">👨‍👩‍👧</div>
+          <h3>Family Support</h3>
+          <p>We work closely with parents to set realistic expectations, explain the sport's benefits, and guide families through the competition journey — step by step.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">📈</div>
+          <h3>Structured Progress</h3>
+          <p>From absolute beginner to national competitor — our structured training pathway ensures every student progresses at the right pace with measurable improvements.</p>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🧠</div>
+          <h3>Mental Strength</h3>
+          <p>Shooting develops unmatched focus, patience, and composure under pressure — skills that benefit students in academics, career, and life beyond the range.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 3: OUR JOURNEY -->
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Ready to <span>Start Shooting?</span></h2>
+        <p>No equipment needed. No experience required. Just bring your determination.</p>
+      </div>
+      <div class="cta-btns">
+        <a href="https://wa.me/919306521724?text=Hi%20AGSR!%20I%20read%20about%20your%20academy%20and%20want%20to%20join." target="_blank" class="btn btn-primary">💬 WhatsApp Us Now</a>
+        <a href="offer.html" class="btn btn-outline">View Disciplines →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'"/>
+          <div class="logo-name"><span>AG</span>SR Sonipat<br><small style="font-size:11px;color:var(--grey);font-weight:400;letter-spacing:2px">SHOOTING RANGE</small></div>
+        </div>
+        <p>Aryan Gateways Shooting Range — Sonipat's premier shooting academy delivering ISSF-standard Olympic training since 2016.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/919306521724" target="_blank" class="footer-social-btn">💬</a>
+          <a href="tel:+919306521724" class="footer-social-btn">📞</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="offer.html">Our Offer</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Disciplines</h4>
+        <ul>
+          <li><a href="offer.html#10m-pistol">10m Air Pistol</a></li>
+          <li><a href="offer.html#10m-rifle">10m Air Rifle</a></li>
+          <li><a href="offer.html#25m-pistol">25m Pistol</a></li>
+          <li><a href="offer.html#50m-pistol">50m Free Pistol</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="fc-info">
+          <strong>📞 Call / WhatsApp</strong><br>+91 93065 21724<br><br>
+          <strong>📍 Location</strong><br>Sonipat, Haryana, India<br><br>
+          <strong>🕐 Open Daily</strong><br>Morning &amp; Evening Batches
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aryan Gateways Shooting Range, Sonipat. All Rights Reserved.</p>
+      <div class="affil">
+        <span class="affil-badge">NRAI Affiliated</span>
+        <span class="affil-badge">Haryana Rifle Assoc.</span>
+        <span class="affil-badge">ISSF Standard</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919306521724" target="_blank" class="wa-float">💬<span class="wa-tooltip">Chat with us!</span></a>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

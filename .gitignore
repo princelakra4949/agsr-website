@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Database (SQLite — don't push real data)
+*.db
+*.db-shm
+*.db-wal
+agsr.db
+
+# Environment & secrets
+.env
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# Vercel
+.vercel

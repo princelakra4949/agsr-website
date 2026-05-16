@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGSR Admin — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --olive:#3d5a2a;--olive-dk:#2a3f1c;--olive-lt:#567a3a;
+      --black:#0d0d0d;--dark:#141414;--card:#1c1c1c;
+      --red:#e63322;--gold:#f5c518;--white:#fff;--grey:#888;
+      --green:#25D366;--radius:12px;
+    }
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--white);min-height:100vh}
+
+    /* ── LOGIN SCREEN ── */
+    #login-screen{
+      position:fixed;inset:0;background:var(--black);
+      display:flex;align-items:center;justify-content:center;z-index:999
+    }
+    .login-box{
+      background:var(--card);border:1px solid rgba(255,255,255,0.08);
+      border-radius:var(--radius);padding:48px 40px;width:100%;max-width:400px;
+      text-align:center
+    }
+    .login-box .logo{font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;margin-bottom:8px}
+    .login-box .logo span{color:var(--gold)}
+    .login-box p{font-size:13px;color:var(--grey);margin-bottom:32px;letter-spacing:1px;text-transform:uppercase}
+    .login-box input{
+      width:100%;padding:14px 16px;
+      background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+      border-radius:8px;color:var(--white);font-size:15px;font-family:'Inter',sans-serif;
+      outline:none;margin-bottom:16px;text-align:center;letter-spacing:4px
+    }
+    .login-box input:focus{border-color:var(--olive-lt)}
+    .login-box button{
+      width:100%;padding:14px;background:var(--olive);color:var(--white);
+      border:none;border-radius:8px;font-family:'Oswald',sans-serif;
+      font-size:16px;font-weight:600;letter-spacing:1px;cursor:pointer;
+      transition:.3s
+    }
+    .login-box button:hover{background:var(--olive-lt)}
+    #login-error{color:var(--red);font-size:13px;margin-top:8px;display:none}
+
+    /* ── SIDEBAR ── */
+    #app{display:none}
+    .layout{display:flex;min-height:100vh}
+    .sidebar{
+      width:240px;flex-shrink:0;background:var(--black);
+      border-right:1px solid rgba(255,255,255,0.06);
+      display:flex;flex-direction:column;padding:0 0 24px;
+      position:fixed;top:0;left:0;bottom:0;z-index:100
+    }
+    .sidebar-logo{
+      padding:24px 20px;border-bottom:1px solid rgba(255,255,255,0.06);
+      font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;
+    }
+    .sidebar-logo span{color:var(--gold)}
+    .sidebar-logo small{display:block;font-size:10px;letter-spacing:2px;color:var(--grey);font-weight:400;margin-top:4px}
+    .nav-item{
+      display:flex;align-items:center;gap:12px;padding:14px 20px;
+      font-size:14px;color:rgba(255,255,255,0.55);cursor:pointer;
+      transition:.25s;border-left:3px solid transparent
+    }
+    .nav-item:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+    .nav-item.active{color:var(--gold);background:rgba(245,197,24,0.06);border-left-color:var(--gold)}
+    .nav-item .icon{font-size:18px;width:24px;text-align:center}
+    .sidebar-spacer{flex:1}
+    .sidebar-logout{
+      margin:0 16px;padding:12px;text-align:center;cursor:pointer;
+      background:rgba(230,51,34,0.12);border:1px solid rgba(230,51,34,0.2);
+      border-radius:8px;color:var(--red);font-size:13px;font-weight:600;
+      letter-spacing:1px;transition:.25s
+    }
+    .sidebar-logout:hover{background:rgba(230,51,34,0.2)}
+
+    /* ── MAIN CONTENT ── */
+    .main{margin-left:240px;flex:1;padding:32px}
+
+    /* ── HEADER ── */
+    .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .page-title{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700}
+    .page-title span{color:var(--gold)}
+    .header-badge{
+      padding:8px 16px;background:rgba(37,211,102,0.12);
+      border:1px solid rgba(37,211,102,0.2);border-radius:50px;
+      font-size:12px;color:var(--green);font-weight:600;letter-spacing:1px
+    }
+
+    /* ── STAT CARDS ── */
+    .stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:32px}
+    .stat-card{
+      background:var(--card);border:1px solid rgba(255,255,255,0.07);
+      border-radius:var(--radius);padding:20px;transition:.3s
+    }
+    .stat-card:hover{transform:translateY(-3px)}
+    .stat-card .num{font-family:'Oswald',sans-serif;font-size:2.5rem;font-weight:700;line-height:1}
+    .stat-card .lbl{font-size:12px;color:var(--grey);letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+    .stat-card.c-new .num{color:var(--gold)}
+    .stat-card.c-total .num{color:#7eb8f7}
+    .stat-card.c-followed .num{color:#b97ef7}
+    .stat-card.c-enrolled .num{color:var(--green)}
+    .stat-card.c-today .num{color:var(--red)}
+
+    /* ── TABLE ── */
+    .table-card{
+      background:var(--card);border:1px solid rgba(255,255,255,0.07);
+      border-radius:var(--radius);overflow:hidden
+    }
+    .table-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.07)
+    }
+    .table-header h3{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:600}
+    .table-filters{display:flex;gap:8px}
+    .filter-btn{
+      padding:6px 14px;border-radius:50px;font-size:12px;font-weight:600;
+      letter-spacing:0.5px;cursor:pointer;border:1px solid rgba(255,255,255,0.12);
+      background:transparent;color:rgba(255,255,255,0.5);transition:.2s
+    }
+    .filter-btn:hover,.filter-btn.active{background:var(--olive);color:var(--white);border-color:var(--olive)}
+    .search-box{
+      padding:8px 14px;background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);border-radius:8px;
+      color:var(--white);font-size:13px;font-family:'Inter',sans-serif;
+      outline:none;width:200px
+    }
+    .search-box:focus{border-color:var(--olive-lt)}
+    table{width:100%;border-collapse:collapse}
+    thead th{
+      padding:12px 16px;text-align:left;font-size:11px;font-weight:600;
+      letter-spacing:1.5px;text-transform:uppercase;color:var(--grey);
+      background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06)
+    }
+    tbody tr{border-bottom:1px solid rgba(255,255,255,0.04);transition:.2s}
+    tbody tr:last-child{border-bottom:none}
+    tbody tr:hover{background:rgba(255,255,255,0.03)}
+    tbody td{padding:14px 16px;font-size:13px;color:rgba(255,255,255,0.8);vertical-align:middle}
+    .td-name{font-weight:600;color:var(--white)}
+    .td-phone a{color:#7eb8f7;text-decoration:none}
+    .td-phone a:hover{text-decoration:underline}
+    .td-date{color:var(--grey);font-size:12px}
+    .status-badge{
+      display:inline-block;padding:3px 10px;border-radius:50px;
+      font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase
+    }
+    .s-new{background:rgba(245,197,24,0.15);color:var(--gold);border:1px solid rgba(245,197,24,0.3)}
+    .s-followed{background:rgba(183,126,247,0.15);color:#b97ef7;border:1px solid rgba(183,126,247,0.3)}
+    .s-enrolled{background:rgba(37,211,102,0.15);color:var(--green);border:1px solid rgba(37,211,102,0.3)}
+    .s-closed{background:rgba(255,255,255,0.08);color:var(--grey);border:1px solid rgba(255,255,255,0.1)}
+    .actions{display:flex;gap:6px}
+    .act-btn{
+      padding:5px 10px;border-radius:6px;font-size:11px;font-weight:600;
+      cursor:pointer;border:none;transition:.2s;letter-spacing:0.5px
+    }
+    .act-wa{background:rgba(37,211,102,0.15);color:var(--green)}
+    .act-wa:hover{background:rgba(37,211,102,0.3)}
+    .act-call{background:rgba(126,184,247,0.15);color:#7eb8f7}
+    .act-call:hover{background:rgba(126,184,247,0.3)}
+    .act-status{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6)}
+    .act-status:hover{background:rgba(255,255,255,0.15)}
+    .act-del{background:rgba(230,51,34,0.12);color:var(--red)}
+    .act-del:hover{background:rgba(230,51,34,0.25)}
+
+    /* empty state */
+    .empty-state{
+      text-align:center;padding:60px 20px;color:var(--grey)
+    }
+    .empty-state .e-icon{font-size:48px;margin-bottom:16px;opacity:0.5}
+    .empty-state p{font-size:14px;letter-spacing:1px}
+
+    /* ── STATUS MODAL ── */
+    .modal-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,0.75);
+      display:none;align-items:center;justify-content:center;z-index:200
+    }
+    .modal-overlay.open{display:flex}
+    .modal{
+      background:var(--card);border:1px solid rgba(255,255,255,0.1);
+      border-radius:var(--radius);padding:32px;width:100%;max-width:360px
+    }
+    .modal h3{font-family:'Oswald',sans-serif;font-size:1.3rem;margin-bottom:20px}
+    .modal-opts{display:flex;flex-direction:column;gap:10px}
+    .modal-opt{
+      padding:12px 16px;border-radius:8px;cursor:pointer;
+      border:1px solid rgba(255,255,255,0.1);font-size:14px;
+      transition:.2s;text-align:left
+    }
+    .modal-opt:hover{background:rgba(255,255,255,0.06);border-color:var(--olive-lt)}
+    .modal-cancel{
+      margin-top:16px;width:100%;padding:10px;background:transparent;
+      border:1px solid rgba(255,255,255,0.1);border-radius:8px;
+      color:var(--grey);cursor:pointer;font-size:13px;transition:.2s
+    }
+    .modal-cancel:hover{background:rgba(255,255,255,0.05)}
+
+    /* ── TOAST ── */
+    .toast{
+      position:fixed;bottom:24px;right:24px;z-index:300;
+      background:var(--olive);color:var(--white);
+      padding:14px 24px;border-radius:10px;font-size:14px;font-weight:600;
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);opacity:0;
+      transform:translateY(16px);transition:.4s;pointer-events:none
+    }
+    .toast.show{opacity:1;transform:none}
+
+    /* ── PAGE SECTIONS ── */
+    .page-section{display:none}
+    .page-section.active{display:block}
+
+    /* ── ADD ACHIEVEMENT FORM ── */
+    .ach-form{
+      background:var(--card);border:1px solid rgba(255,255,255,0.07);
+      border-radius:var(--radius);padding:32px;margin-bottom:24px
+    }
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .fg label{display:block;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--grey);margin-bottom:8px}
+    .fg input,.fg select,.fg textarea{
+      width:100%;padding:12px 14px;background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);border-radius:8px;
+      color:var(--white);font-family:'Inter',sans-serif;font-size:13px;outline:none
+    }
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--olive-lt)}
+    .fg{margin-bottom:16px}
+    .btn-save{
+      padding:12px 28px;background:var(--olive);color:var(--white);
+      border:none;border-radius:8px;font-family:'Oswald',sans-serif;
+      font-size:14px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:.3s
+    }
+    .btn-save:hover{background:var(--olive-lt)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .sidebar{display:none}
+      .main{margin-left:0}
+      .stats-row{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:600px){
+      .stats-row{grid-template-columns:1fr 1fr}
+      .form-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ─────────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="logo"><span>AG</span>SR</div>
+    <p>Admin Panel · Enter Password</p>
+    <input type="password" id="pw-input" placeholder="••••••••" onkeyup="if(event.key==='Enter')doLogin()" />
+    <button onclick="doLogin()">🔓 Login</button>
+    <div id="login-error">❌ Incorrect password</div>
+  </div>
+</div>
+
+<!-- ── APP ───────────────────────────────────────────────── -->
+<div id="app">
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo"><span>AG</span>SR Admin<small>Shooting Academy</small></div>
+      <div class="nav-item active" onclick="showPage('dashboard')">
+        <span class="icon">📊</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('enquiries')">
+        <span class="icon">📋</span> Enquiries
+      </div>
+      <div class="nav-item" onclick="showPage('achievements')">
+        <span class="icon">🏆</span> Achievements
+      </div>
+      <div class="nav-item" onclick="window.open('/', '_blank')">
+        <span class="icon">🌐</span> View Website
+      </div>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-logout" onclick="logout()">🚪 Logout</div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <!-- ── DASHBOARD PAGE ── -->
+      <div class="page-section active" id="page-dashboard">
+        <div class="page-header">
+          <h1 class="page-title">Dashboard <span>Overview</span></h1>
+          <span class="header-badge">🟢 Live</span>
+        </div>
+        <div class="stats-row" id="stats-row">
+          <div class="stat-card c-total"><div class="num" id="s-total">0</div><div class="lbl">Total Enquiries</div></div>
+          <div class="stat-card c-new"><div class="num" id="s-new">0</div><div class="lbl">New</div></div>
+          <div class="stat-card c-followed"><div class="num" id="s-followed">0</div><div class="lbl">Followed Up</div></div>
+          <div class="stat-card c-enrolled"><div class="num" id="s-enrolled">0</div><div class="lbl">Enrolled</div></div>
+          <div class="stat-card c-today"><div class="num" id="s-today">0</div><div class="lbl">Today</div></div>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Recent Enquiries</h3>
+            <button class="filter-btn" onclick="showPage('enquiries')">View All →</button>
+          </div>
+          <table>
+            <thead><tr>
+              <th>#</th><th>Name</th><th>Phone</th><th>Discipline</th><th>Status</th><th>Date</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="recent-tbody">
+              <tr><td colspan="7"><div class="empty-state"><div class="e-icon">📋</div><p>No enquiries yet</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── ENQUIRIES PAGE ── -->
+      <div class="page-section" id="page-enquiries">
+        <div class="page-header">
+          <h1 class="page-title">All <span>Enquiries</span></h1>
+          <div style="display:flex;gap:10px;align-items:center">
+            <input class="search-box" type="text" placeholder="🔍 Search name/phone..." oninput="filterEnquiries(this.value)" />
+            <button class="filter-btn active" onclick="filterByStatus('all',this)">All</button>
+            <button class="filter-btn" onclick="filterByStatus('new',this)">New</button>
+            <button class="filter-btn" onclick="filterByStatus('followed',this)">Followed</button>
+            <button class="filter-btn" onclick="filterByStatus('enrolled',this)">Enrolled</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead><tr>
+              <th>#</th><th>Name</th><th>Phone</th><th>Age</th><th>Discipline</th><th>Message</th><th>Status</th><th>Date</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="all-tbody">
+              <tr><td colspan="9"><div class="empty-state"><div class="e-icon">📋</div><p>Loading enquiries...</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── ACHIEVEMENTS PAGE ── -->
+      <div class="page-section" id="page-achievements">
+        <div class="page-header">
+          <h1 class="page-title">Manage <span>Achievements</span></h1>
+        </div>
+        <div class="ach-form">
+          <h3 style="font-family:'Oswald',sans-serif;font-size:1.2rem;margin-bottom:24px">➕ Add Achievement</h3>
+          <div class="form-row">
+            <div class="fg"><label>Title *</label><input type="text" id="ach-title" placeholder="e.g. District Gold Medal 2024" /></div>
+            <div class="fg"><label>Level</label>
+              <select id="ach-level">
+                <option>District</option><option>State</option><option>National</option><option>International</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fg"><label>Date</label><input type="date" id="ach-date" /></div>
+            <div class="fg"><label>Image Filename</label><input type="text" id="ach-file" placeholder="e.g. medal1.jpg" /></div>
+          </div>
+          <div class="fg"><label>Description</label><textarea id="ach-desc" rows="2" placeholder="Brief description..."></textarea></div>
+          <button class="btn-save" onclick="addAchievement()">💾 Save Achievement</button>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><h3>All Achievements</h3></div>
+          <table>
+            <thead><tr><th>#</th><th>Title</th><th>Level</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="ach-tbody">
+              <tr><td colspan="5"><div class="empty-state"><div class="e-icon">🏆</div><p>No achievements yet</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Status Modal -->
+<div class="modal-overlay" id="status-modal">
+  <div class="modal">
+    <h3>Update Status</h3>
+    <div class="modal-opts">
+      <div class="modal-opt" onclick="setStatus('new')">🟡 New — Not yet contacted</div>
+      <div class="modal-opt" onclick="setStatus('followed')">🟣 Followed Up — In discussion</div>
+      <div class="modal-opt" onclick="setStatus('enrolled')">🟢 Enrolled — Joined academy</div>
+      <div class="modal-opt" onclick="setStatus('closed')">⚫ Closed — Not interested</div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let TOKEN = '';
+  let allEnquiries = [];
+  let currentEnqId = null;
+  let currentFilter = 'all';
+
+  // ── LOGIN ──────────────────────────────────────────────────
+  function doLogin() {
+    const pw = document.getElementById('pw-input').value;
+    fetch('/api/admin/login', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw })
+    })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) {
+        TOKEN = d.token;
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        loadStats();
+        loadEnquiries();
+        loadAchievements();
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+      }
+    })
+    .catch(() => { showToast('❌ Cannot connect to server. Is it running?'); });
+  }
+
+  function logout() {
+    TOKEN = '';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('pw-input').value = '';
+  }
+
+  // ── NAVIGATION ─────────────────────────────────────────────
+  function showPage(name) {
+    document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    event.currentTarget && event.currentTarget.classList.add('active');
+  }
+
+  // ── STATS ──────────────────────────────────────────────────
+  function loadStats() {
+    fetch('/api/admin/stats', { headers: { authorization: TOKEN } })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) {
+        animNum('s-total', d.total);
+        animNum('s-new', d.new);
+        animNum('s-followed', d.followed);
+        animNum('s-enrolled', d.enrolled);
+        animNum('s-today', d.today);
+      }
+    });
+  }
+
+  function animNum(id, target) {
+    const el = document.getElementById(id);
+    let n = 0;
+    const step = Math.ceil(target / 20) || 1;
+    const iv = setInterval(() => {
+      n = Math.min(n + step, target);
+      el.textContent = n;
+      if (n >= target) clearInterval(iv);
+    }, 50);
+  }
+
+  // ── ENQUIRIES ──────────────────────────────────────────────
+  function loadEnquiries() {
+    fetch('/api/admin/enquiries', { headers: { authorization: TOKEN } })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) {
+        allEnquiries = d.data;
+        renderTable('recent-tbody', allEnquiries.slice(0, 5), true);
+        renderTable('all-tbody', allEnquiries, false);
+      }
+    });
+  }
+
+  function renderTable(tbodyId, rows, compact) {
+    const tbody = document.getElementById(tbodyId);
+    if (!rows.length) {
+      tbody.innerHTML = `<tr><td colspan="9"><div class="empty-state"><div class="e-icon">📭</div><p>No enquiries found</p></div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = rows.map(r => `
+      <tr id="row-${r.id}">
+        <td class="td-date">#${r.id}</td>
+        <td class="td-name">${esc(r.name)}</td>
+        <td class="td-phone"><a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></td>
+        ${compact ? '' : `<td>${esc(r.age_group || '—')}</td>`}
+        <td>${esc(r.discipline || '—')}</td>
+        ${compact ? '' : `<td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--grey)">${esc(r.message || '—')}</td>`}
+        <td><span class="status-badge s-${r.status}">${r.status}</span></td>
+        <td class="td-date">${formatDate(r.created_at)}</td>
+        <td>
+          <div class="actions">
+            <button class="act-btn act-wa" onclick="waLink('${esc(r.phone)}','${esc(r.name)}')">💬</button>
+            <button class="act-btn act-call" onclick="window.open('tel:${esc(r.phone)}')">📞</button>
+            <button class="act-btn act-status" onclick="openModal(${r.id})">✏️</button>
+            <button class="act-btn act-del" onclick="deleteEnq(${r.id})">🗑</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterEnquiries(q) {
+    q = q.toLowerCase();
+    const filtered = allEnquiries.filter(r =>
+      r.name.toLowerCase().includes(q) || r.phone.includes(q)
+    );
+    renderTable('all-tbody', filtered, false);
+  }
+
+  function filterByStatus(status, btn) {
+    currentFilter = status;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filtered = status === 'all' ? allEnquiries : allEnquiries.filter(r => r.status === status);
+    renderTable('all-tbody', filtered, false);
+  }
+
+  // ── STATUS MODAL ───────────────────────────────────────────
+  function openModal(id) {
+    currentEnqId = id;
+    document.getElementById('status-modal').classList.add('open');
+  }
+  function closeModal() {
+    document.getElementById('status-modal').classList.remove('open');
+    currentEnqId = null;
+  }
+  function setStatus(status) {
+    if (!currentEnqId) return;
+    fetch(`/api/admin/enquiries/${currentEnqId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', authorization: TOKEN },
+      body: JSON.stringify({ status })
+    })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) {
+        const idx = allEnquiries.findIndex(e => e.id === currentEnqId);
+        if (idx !== -1) allEnquiries[idx].status = status;
+        loadStats();
+        renderTable('recent-tbody', allEnquiries.slice(0, 5), true);
+        renderTable('all-tbody', allEnquiries, false);
+        showToast('✅ Status updated!');
+      }
+      closeModal();
+    });
+  }
+
+  // ── DELETE ─────────────────────────────────────────────────
+  function deleteEnq(id) {
+    if (!confirm('Delete this enquiry?')) return;
+    fetch(`/api/admin/enquiries/${id}`, {
+      method: 'DELETE', headers: { authorization: TOKEN }
+    })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) {
+        allEnquiries = allEnquiries.filter(e => e.id !== id);
+        loadStats();
+        renderTable('recent-tbody', allEnquiries.slice(0, 5), true);
+        renderTable('all-tbody', allEnquiries, false);
+        showToast('🗑 Enquiry deleted.');
+      }
+    });
+  }
+
+  // ── ACHIEVEMENTS ───────────────────────────────────────────
+  function loadAchievements() {
+    fetch('/api/achievements', { headers: { authorization: TOKEN } })
+    .then(r => r.json())
+    .then(d => {
+      const tbody = document.getElementById('ach-tbody');
+      if (!d.data || !d.data.length) {
+        tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><div class="e-icon">🏆</div><p>No achievements yet</p></div></td></tr>`;
+        return;
+      }
+      tbody.innerHTML = d.data.map(a => `
+        <tr>
+          <td>#${a.id}</td>
+          <td style="font-weight:600">${esc(a.title)}</td>
+          <td><span class="status-badge s-new">${esc(a.level)}</span></td>
+          <td class="td-date">${a.date || '—'}</td>
+          <td><button class="act-btn act-del" onclick="deleteAch(${a.id})">🗑</button></td>
+        </tr>
+      `).join('');
+    });
+  }
+
+  function addAchievement() {
+    const data = {
+      title: document.getElementById('ach-title').value,
+      description: document.getElementById('ach-desc').value,
+      date: document.getElementById('ach-date').value,
+      filename: document.getElementById('ach-file').value,
+      level: document.getElementById('ach-level').value
+    };
+    if (!data.title) { showToast('❌ Title is required'); return; }
+    fetch('/api/admin/achievements', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', authorization: TOKEN },
+      body: JSON.stringify(data)
+    })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) { showToast('✅ Achievement saved!'); loadAchievements(); }
+    });
+  }
+
+  function deleteAch(id) {
+    showToast('(Delete endpoint — add to server if needed)');
+  }
+
+  // ── HELPERS ────────────────────────────────────────────────
+  function waLink(phone, name) {
+    window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=Hi%20${encodeURIComponent(name)}!%20This%20is%20AGSR%20Sonipat.%20We%20received%20your%20enquiry.`, '_blank');
+  }
+
+  function esc(str) {
+    return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function formatDate(dt) {
+    if (!dt) return '—';
+    const d = new Date(dt);
+    return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'2-digit', hour:'2-digit', minute:'2-digit' });
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>

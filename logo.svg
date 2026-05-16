@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="250" cy="250" r="242"/>
+    </clipPath>
+    <!-- Arc for top curved text -->
+    <path id="topArc" d="M 38,250 A 212,212 0 1,1 462,250"/>
+  </defs>
+
+  <!-- ── BACKGROUND ── -->
+  <circle cx="250" cy="250" r="248" fill="#3d5a1c"/>
+
+  <!-- ── SHOOTING TARGET (left-center) ── -->
+  <circle cx="210" cy="232" r="210" fill="#cc2200" clip-path="url(#circleClip)"/>
+  <circle cx="210" cy="232" r="168" fill="#ffffff" clip-path="url(#circleClip)"/>
+  <circle cx="210" cy="232" r="128" fill="#cc2200" clip-path="url(#circleClip)"/>
+  <circle cx="210" cy="232" r="90"  fill="#ffffff" clip-path="url(#circleClip)"/>
+  <circle cx="210" cy="232" r="54"  fill="#cc2200" clip-path="url(#circleClip)"/>
+  <circle cx="210" cy="232" r="24"  fill="#ffffff" clip-path="url(#circleClip)"/>
+  <circle cx="210" cy="232" r="9"   fill="#cc2200" clip-path="url(#circleClip)"/>
+
+  <!-- ── CROSSHAIR LINES (full span) ── -->
+  <!-- Vertical line -->
+  <rect x="205" y="8"   width="12" height="230" fill="#111111" clip-path="url(#circleClip)"/>
+  <rect x="205" y="240" width="12" height="258" fill="#111111" clip-path="url(#circleClip)"/>
+  <!-- Horizontal line -->
+  <rect x="8"   y="226" width="200" height="12" fill="#111111" clip-path="url(#circleClip)"/>
+  <rect x="220" y="226" width="280" height="12" fill="#111111" clip-path="url(#circleClip)"/>
+
+  <!-- Scope tick marks – vertical axis -->
+  <rect x="198" y="80"  width="26" height="6" fill="#111111"/>
+  <rect x="201" y="110" width="20" height="5" fill="#111111"/>
+  <rect x="198" y="345" width="26" height="6" fill="#111111"/>
+  <rect x="201" y="375" width="20" height="5" fill="#111111"/>
+  <!-- Scope tick marks – horizontal axis -->
+  <rect x="80"  y="220" width="6" height="26" fill="#111111"/>
+  <rect x="110" y="223" width="5" height="20" fill="#111111"/>
+  <rect x="290" y="220" width="6" height="26" fill="#111111"/>
+  <rect x="322" y="223" width="5" height="20" fill="#111111"/>
+
+  <!-- ── AGSR SONIPAT TEXT (lower-right quadrant) ── -->
+  <text x="262" y="322"
+        font-family="'Arial Black', Arial, sans-serif"
+        font-weight="900" font-size="70" fill="#f5c518" letter-spacing="0">AG</text>
+  <text x="364" y="322"
+        font-family="'Arial Black', Arial, sans-serif"
+        font-weight="900" font-size="70" fill="#ffffff" letter-spacing="0">SR</text>
+  <text x="262" y="378"
+        font-family="'Arial Black', Arial, sans-serif"
+        font-weight="900" font-size="40" fill="#ffffff" letter-spacing="5">SONIPAT</text>
+
+  <!-- ── CURVED TEXT (around outside: ARYAN GATEWAYS SHOOTING RANGE) ── -->
+  <text font-family="'Arial Black', Arial, sans-serif"
+        font-weight="900" font-size="30" fill="#ffffff" letter-spacing="3">
+    <textPath xlink:href="#topArc" startOffset="50%" text-anchor="middle">
+      ARYAN GATEWAYS SHOOTING RANGE
+    </textPath>
+  </text>
+
+  <!-- ── OUTER BORDER RING ── -->
+  <circle cx="250" cy="250" r="245" fill="none" stroke="#1e2e0e" stroke-width="8"/>
+  <circle cx="250" cy="250" r="238" fill="none" stroke="#5a7a30" stroke-width="2"/>
+</svg>

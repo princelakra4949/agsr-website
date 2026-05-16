@@ -1,0 +1,76 @@
+============================================================
+ AGSR SONIPAT — WEBSITE SETUP GUIDE
+============================================================
+
+📁 FILES IN THIS FOLDER:
+   index.html    → Main website (frontend)
+   admin.html    → Admin dashboard (for you to manage enquiries)
+   server.js     → Backend server (Node.js)
+   package.json  → Project dependencies
+   agsr.db       → Database (auto-created when server runs)
+
+============================================================
+ STEP 1: INSTALL NODE.JS (one time only)
+============================================================
+Download & install from: https://nodejs.org
+Choose the "LTS" version.
+
+============================================================
+ STEP 2: INSTALL DEPENDENCIES
+============================================================
+1. Open this folder in File Explorer
+2. Click on the address bar, type: cmd  (then press Enter)
+3. In the black window, type:
+      npm install
+   Press Enter and wait for it to finish.
+
+============================================================
+ STEP 3: RUN THE WEBSITE
+============================================================
+In the same cmd window, type:
+   node server.js
+Press Enter.
+
+You will see:
+   🎯 Website:  http://localhost:3000
+   🎯 Admin:    http://localhost:3000/admin
+
+============================================================
+ STEP 4: OPEN IN BROWSER
+============================================================
+   Website → http://localhost:3000
+   Admin   → http://localhost:3000/admin
+   Password: agsr2024
+
+============================================================
+ ADDING YOUR IMAGES
+============================================================
+Copy these files into this folder (AGSR WEBSITE):
+
+   logo.png      → Your circular AGSR logo
+   academy.jpg   → Your shooting range photo
+
+For achievement photos, add them to this folder and
+use the Admin panel to register them.
+
+============================================================
+ CHANGING ADMIN PASSWORD
+============================================================
+Open server.js in Notepad.
+Find the line:  const ADMIN_PASS = 'agsr2024';
+Change 'agsr2024' to your desired password.
+Save and restart the server.
+
+============================================================
+ HOSTING ONLINE (optional - for public access)
+============================================================
+To put this website live on the internet:
+1. Use a hosting service like Railway.app or Render.com
+2. Or contact a web developer to help deploy it.
+
+============================================================
+ NEED HELP?
+============================================================
+WhatsApp: 9306521724
+
+============================================================

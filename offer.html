@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Offer | AGSR Sonipat — 10m, 25m & 50m Shooting Disciplines</title>
+  <meta name="description" content="AGSR Sonipat offers Olympic-standard training in 10m Air Pistol, 10m Air Rifle, 25m Pistol (Sports Pistol & Standard Fire), and 50m Free Pistol. Equipment provided for beginners."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--dark); }
+    section:nth-child(odd)  { background: var(--black); }
+
+    /* ── Discipline Overview Grid ── */
+    .disc-overview { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; margin-top: 48px; }
+    .disc-overview-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius); padding: 36px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .disc-overview-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background: var(--red); transform:scaleX(0); transform-origin:left;
+      transition: var(--transition);
+    }
+    .disc-overview-card:hover { transform:translateY(-8px); box-shadow:var(--shadow); border-color:rgba(230,51,34,0.3); }
+    .disc-overview-card:hover::before { transform:scaleX(1); }
+    .disc-ov-dist {
+      font-family:'Bebas Neue',sans-serif; font-size:4rem; line-height:1;
+      color:rgba(255,255,255,0.05); position:absolute; top:12px; right:16px;
+    }
+    .disc-ov-icon { width:56px; height:56px; background:linear-gradient(135deg,var(--olive),var(--olive-dk)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:26px; }
+    .disc-ov-title { font-family:'Oswald',sans-serif; font-size:1.4rem; font-weight:700; color:var(--white); }
+    .disc-ov-sub { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:600; }
+    .disc-ov-desc { font-size:14px; line-height:1.6; color:rgba(255,255,255,0.55); }
+    .disc-ov-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .disc-ov-card-link {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:'Oswald',sans-serif; font-size:13px; font-weight:600;
+      letter-spacing:1px; text-transform:uppercase; color:var(--red);
+      transition:var(--transition); margin-top:4px;
+    }
+    .disc-ov-card-link:hover { gap:10px; }
+
+    /* ── Discipline Detail Section ── */
+    .disc-section { padding: 80px 0; }
+    .disc-section:nth-child(odd) { background: var(--black); }
+    .disc-section:nth-child(even) { background: var(--dark); }
+
+    .disc-header-band {
+      display:flex; align-items:center; gap:20px; margin-bottom:40px;
+      padding:24px 28px; border-radius:var(--radius);
+      background:linear-gradient(135deg, rgba(61,90,42,0.2), rgba(61,90,42,0.05));
+      border:1px solid rgba(61,90,42,0.3);
+    }
+    .disc-header-dist {
+      font-family:'Bebas Neue',sans-serif; font-size:4.5rem; line-height:1;
+      color:var(--gold); flex-shrink:0;
+    }
+    .disc-header-info h2 { font-family:'Oswald',sans-serif; font-size:1.8rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+    .disc-header-info p { font-size:13px; color:var(--grey); letter-spacing:1px; text-transform:uppercase; }
+
+    .disc-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:56px; align-items:start; }
+
+    .disc-desc { font-size:16px; line-height:1.8; color:rgba(255,255,255,0.65); margin-bottom:20px; }
+
+    .spec-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:24px 0; }
+    .spec-item {
+      padding:16px; background:var(--card-bg);
+      border:1px solid rgba(255,255,255,0.07); border-radius:8px;
+    }
+    .spec-item .spec-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--grey); margin-bottom:4px; }
+    .spec-item .spec-val { font-family:'Oswald',sans-serif; font-size:15px; font-weight:600; color:var(--white); }
+
+    .sub-events { display:flex; flex-direction:column; gap:12px; margin:20px 0; }
+    .sub-event {
+      padding:18px 20px; background:var(--card-bg);
+      border:1px solid rgba(255,255,255,0.07); border-radius:8px;
+      border-left:3px solid var(--gold); transition:var(--transition);
+    }
+    .sub-event:hover { border-color:rgba(245,197,24,0.5); transform:translateX(4px); }
+    .sub-event h4 { font-family:'Oswald',sans-serif; font-size:15px; font-weight:700; color:var(--gold); margin-bottom:6px; }
+    .sub-event p { font-size:13px; line-height:1.5; color:rgba(255,255,255,0.55); }
+
+    .pathway-steps { display:flex; flex-direction:column; gap:0; }
+    .path-step {
+      display:flex; align-items:flex-start; gap:16px; padding:16px 0;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .path-step:last-child { border-bottom:none; }
+    .path-num {
+      width:32px; height:32px; border-radius:50%; flex-shrink:0;
+      background:var(--olive); display:flex; align-items:center; justify-content:center;
+      font-family:'Oswald',sans-serif; font-size:14px; font-weight:700; color:var(--white);
+    }
+    .path-step h5 { font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; color:var(--white); margin-bottom:3px; }
+    .path-step p { font-size:12px; color:var(--grey); line-height:1.4; }
+
+    .equip-badge {
+      display:inline-flex; align-items:center; gap:8px; padding:8px 16px;
+      border-radius:50px; font-size:13px; font-weight:600; letter-spacing:0.5px;
+      margin-bottom:16px;
+    }
+    .equip-free { background:rgba(37,211,102,0.15); border:1px solid rgba(37,211,102,0.3); color:#25D366; }
+    .equip-own  { background:rgba(245,197,24,0.15); border:1px solid rgba(245,197,24,0.3); color:var(--gold); }
+
+    /* ── Comparison Table ── */
+    .compare-table-wrap { overflow-x:auto; margin-top:40px; }
+    .compare-table { width:100%; border-collapse:collapse; min-width:700px; }
+    .compare-table th {
+      background:var(--olive-dk); color:var(--white);
+      font-family:'Oswald',sans-serif; font-size:13px; font-weight:700;
+      letter-spacing:1px; text-transform:uppercase;
+      padding:14px 16px; text-align:left;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+    .compare-table th:first-child { width:180px; }
+    .compare-table td {
+      padding:13px 16px; font-size:13px; color:rgba(255,255,255,0.75);
+      border:1px solid rgba(255,255,255,0.07);
+    }
+    .compare-table tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+    .compare-table tr:hover td { background:rgba(61,90,42,0.12); }
+    .compare-table .row-label { font-weight:600; color:var(--gold); font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:0.5px; }
+    .check { color:#25D366; font-size:16px; }
+    .cross { color:var(--grey); font-size:16px; }
+
+    /* ── CTA Strip ── */
+    .cta-strip { background:linear-gradient(135deg,var(--olive-dk),var(--black)); border-top:1px solid rgba(61,90,42,0.3); padding:60px 0; }
+    .cta-inner { display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+    .cta-inner h2 { font-family:'Oswald',sans-serif; font-size:2rem; font-weight:700; }
+    .cta-inner h2 span { color:var(--gold); }
+    .cta-inner p { font-size:15px; color:rgba(255,255,255,0.6); margin-top:8px; }
+    .cta-btns { display:flex; gap:12px; flex-wrap:wrap; flex-shrink:0; }
+
+    @media(max-width:900px) {
+      .disc-overview { grid-template-columns:1fr; }
+      .disc-grid { grid-template-columns:1fr; gap:32px; }
+      .spec-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:600px) {
+      .spec-grid { grid-template-columns:1fr; }
+      .cta-inner { flex-direction:column; text-align:center; }
+      .cta-btns { justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'"/>
+      <div class="nav-logo-text">
+        <div class="name"><span>AG</span>SR Sonipat</div>
+        <div class="sub">Shooting Academy</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="offer.html" class="active">Our Offer</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="https://wa.me/919306521724" target="_blank" class="nav-wa">💬 WhatsApp</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" onclick="toggleMenu()">About Us</a>
+  <a href="offer.html" class="active" onclick="toggleMenu()">Our Offer</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  <a href="https://wa.me/919306521724" target="_blank">💬 WhatsApp Us</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <svg class="page-hero-crosshair" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="150" r="140" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="100" fill="none" stroke="#e63322" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="60" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="20" fill="none" stroke="#e63322" stroke-width="1.5"/>
+    <line x1="150" y1="0" x2="150" y2="300" stroke="#fff" stroke-width="1.5"/>
+    <line x1="0" y1="150" x2="300" y2="150" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="5" fill="#e63322"/>
+  </svg>
+  <img src="Agsr logo/Logo_International_Shooting_Sport_Federation_(ISSF).svg" alt="ISSF Logo" style="position:absolute; right:calc(5% + 60px); top:50%; transform:translateY(-42%); width:220px; height:220px; object-fit:contain; z-index:2; pointer-events:none; filter:drop-shadow(0 4px 20px rgba(0,0,0,0.7)); opacity:0.9;"/>
+  <div class="page-hero-content">
+    <h1>Our <span>Disciplines</span></h1>
+    <p>Olympic-standard training in four ISSF-approved shooting events. From absolute beginners to national competitors — we have a pathway for everyone.</p>
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="#10m-pistol" class="btn btn-primary">Explore Disciplines 🎯</a>
+      <a href="#comparison" class="btn btn-outline">Compare All Events</a>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section style="background:var(--dark);padding:80px 0">
+  <div class="container">
+    <p class="section-label" style="text-align:center">ISSF Olympic Events</p>
+    <h2 class="section-title" style="text-align:center">All <span>4 Disciplines</span> at a Glance</h2>
+    <div class="divider" style="margin:20px auto 0"></div>
+    <div class="disc-overview">
+
+      <div class="disc-overview-card reveal">
+        <div class="disc-ov-dist">10m</div>
+        <div class="disc-ov-icon" style="background:none; border-radius:0; width:80px; height:48px; overflow:visible;">
+          <img src="Agsr logo/be8d6675-ea06-429b-abb2-605680f09e2e.jpg" alt="10m Air Pistol" style="width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6));"/>
+        </div>
+        <div class="disc-ov-title">10m Air Pistol</div>
+        <div class="disc-ov-sub">Indoor · Precision · Electronic Scoring</div>
+        <p class="disc-ov-desc">The most popular Olympic shooting event. Ideal for beginners — shoot at electronic targets from 10 metres with academy-provided pistols. Real-time decimal scoring.</p>
+        <div class="disc-ov-tags">
+          <span class="tag tag-green">Free Equipment</span>
+          <span class="tag tag-gold">Beginner Friendly</span>
+          <span class="tag tag-olive">Olympic</span>
+        </div>
+        <a href="#10m-pistol" class="disc-ov-card-link">Full Details →</a>
+      </div>
+
+      <div class="disc-overview-card reveal">
+        <div class="disc-ov-dist">10m</div>
+        <div class="disc-ov-icon" style="background:#fff; border-radius:8px; width:80px; height:48px; overflow:hidden; padding:4px;">
+          <img src="Agsr logo/lg400-e-anatomic-2017-03-30-1400x1400.png" alt="10m Air Rifle" style="width:100%; height:100%; object-fit:contain;"/>
+        </div>
+        <div class="disc-ov-title">10m Air Rifle</div>
+        <div class="disc-ov-sub">Indoor · Prone/Standing · Precision</div>
+        <p class="disc-ov-desc">Fired from standing or prone position at 10-metre electronic targets. Air rifle demands exceptional stability, breathing control, and trigger discipline.</p>
+        <div class="disc-ov-tags">
+          <span class="tag tag-gold">Beginner Friendly</span>
+          <span class="tag tag-olive">Olympic</span>
+        </div>
+        <a href="#10m-rifle" class="disc-ov-card-link">Full Details →</a>
+      </div>
+
+      <div class="disc-overview-card reveal">
+        <div class="disc-ov-dist">25m</div>
+        <div class="disc-ov-icon" style="background:#fff; border-radius:8px; width:80px; height:48px; overflow:hidden; padding:4px;">
+          <img src="Agsr logo/images.jpeg" alt="25m Pistol" style="width:100%; height:100%; object-fit:contain;"/>
+        </div>
+        <div class="disc-ov-title">25m Pistol</div>
+        <div class="disc-ov-sub">Precision + Rapid Fire · Sports Pistol & Standard Fire</div>
+        <p class="disc-ov-desc">A dynamic mix of precision and speed — includes Sports Pistol (slow + rapid fire) and Standard Fire sub-events. Tests composure under time pressure.</p>
+        <div class="disc-ov-tags">
+          <span class="tag tag-red">Intermediate+</span>
+          <span class="tag tag-olive">Olympic</span>
+        </div>
+        <a href="#25m-pistol" class="disc-ov-card-link">Full Details →</a>
+      </div>
+
+      <div class="disc-overview-card reveal">
+        <div class="disc-ov-dist">50m</div>
+        <div class="disc-ov-icon" style="background:#fff; border-radius:8px; width:80px; height:48px; overflow:hidden; padding:4px;">
+          <img src="Agsr logo/image.jpg" alt="50m Free Pistol" style="width:100%; height:100%; object-fit:contain;"/>
+        </div>
+        <div class="disc-ov-title">50m Free Pistol</div>
+        <div class="disc-ov-sub">Outdoor · Pure Precision · Advanced</div>
+        <p class="disc-ov-desc">The ultimate test of precision at 50 metres — the purest long-range pistol discipline. Reserved for advanced shooters on the national competition pathway.</p>
+        <div class="disc-ov-tags">
+          <span class="tag tag-red">Advanced Only</span>
+          <span class="tag tag-olive">Olympic</span>
+        </div>
+        <a href="#50m-pistol" class="disc-ov-card-link">Full Details →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10M AIR PISTOL ══════════════════════════════════════ -->
+<section class="disc-section" id="10m-pistol" style="background:var(--black)">
+  <div class="container">
+    <div class="disc-header-band reveal">
+      <div class="disc-header-dist">10m</div>
+      <div class="disc-header-info">
+        <h2>10m Air Pistol</h2>
+        <p>Indoor · Precision · Electronic Targets · Olympic Event</p>
+      </div>
+    </div>
+    <div class="disc-grid">
+      <div class="reveal-left">
+        <span class="equip-badge equip-free">✅ Free Equipment — Pistol Provided</span>
+        <p class="disc-desc">The 10-metre Air Pistol is the flagship discipline at AGSR Sonipat and the ideal starting point for any new shooter. Participants fire from a standing unsupported position at an electronic target 10 metres away, using a compressed-air pistol.</p>
+        <p class="disc-desc">At AGSR, this event uses our <strong style="color:var(--white)">2 electronic target machines</strong> that display scores in real time with decimal precision (0.0 to 10.9) — exactly matching ISSF competition conditions. Beginners use our 5 academy pistols completely free.</p>
+        <p class="disc-desc">10m Air Pistol is physically accessible to all ages and body types, making it one of the most inclusive Olympic sports. It develops extraordinary focus, breath control, and fine motor precision.</p>
+
+        <h3 style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold);margin:28px 0 14px;letter-spacing:1px;text-transform:uppercase">Technical Specifications</h3>
+        <div class="spec-grid">
+          <div class="spec-item"><div class="spec-label">Distance</div><div class="spec-val">10 Metres</div></div>
+          <div class="spec-item"><div class="spec-label">Position</div><div class="spec-val">Standing, One Hand</div></div>
+          <div class="spec-item"><div class="spec-label">Qualification Shots</div><div class="spec-val">60 (Men) / 40 (Women)</div></div>
+          <div class="spec-item"><div class="spec-label">Scoring</div><div class="spec-val">Decimal (0.0 – 10.9)</div></div>
+          <div class="spec-item"><div class="spec-label">Target Ring (10)</div><div class="spec-val">0.5mm diameter</div></div>
+          <div class="spec-item"><div class="spec-label">Level</div><div class="spec-val">Beginner → Elite</div></div>
+        </div>
+
+      </div>
+
+      <div class="reveal-right">
+        <div style="background:var(--card-bg);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);overflow:hidden">
+          <img src="Agsr logo/be8d6675-ea06-429b-abb2-605680f09e2e.jpg" alt="10m Air Pistol — Morini CM 200 EI" style="width:100%;aspect-ratio:16/10;object-fit:contain;background:#fff;padding:16px;"/>
+          <div style="padding:24px">
+            <h4 style="font-family:'Oswald',sans-serif;color:var(--gold);margin-bottom:16px;font-size:15px;letter-spacing:1px;text-transform:uppercase">Why Start with 10m?</h4>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--gold);font-size:14px;margin-top:2px">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5">Most accessible — all ages, no prior experience</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--gold);font-size:14px;margin-top:2px">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5">Equipment provided free — 5 pistols at no charge</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--gold);font-size:14px;margin-top:2px">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5">Electronic scoring — instant feedback every shot</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--gold);font-size:14px;margin-top:2px">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5">Indoor range — train in any weather, year-round</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--gold);font-size:14px;margin-top:2px">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5">Clear pathway to district, state, national competitions</p></div>
+            </div>
+            <a href="https://wa.me/919306521724?text=Hi!%20I%20want%20to%20train%20in%2010m%20Air%20Pistol%20at%20AGSR%20Sonipat." target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px">Train This Discipline 💬</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competition Pathway — full width -->
+    <div style="margin-top:48px;">
+      <h3 style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold);margin-bottom:20px;letter-spacing:1px;text-transform:uppercase;text-align:center;">Competition Pathway</h3>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+        <div class="path-step"><div class="path-num">1</div><div><h5>Academy Training</h5><p>Build fundamentals — stance, grip, trigger, breathing at AGSR</p></div></div>
+        <div class="path-step"><div class="path-num">2</div><div><h5>District Championship</h5><p>Compete at district level under HRA supervision</p></div></div>
+        <div class="path-step"><div class="path-num">3</div><div><h5>State Championship</h5><p>Haryana State Shooting Championship — represent Sonipat</p></div></div>
+        <div class="path-step"><div class="path-num">4</div><div><h5>National Championship</h5><p>NRAI National Shooting Championship — compete for India</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10M AIR RIFLE ═══════════════════════════════════════ -->
+<section class="disc-section" id="10m-rifle" style="background:var(--dark)">
+  <div class="container">
+    <div class="disc-header-band reveal">
+      <div class="disc-header-dist">10m</div>
+      <div class="disc-header-info">
+        <h2>10m Air Rifle</h2>
+        <p>Indoor · Standing / Prone · Precision · Olympic Event</p>
+      </div>
+    </div>
+    <div class="disc-grid">
+      <div class="reveal-left">
+        <span class="equip-badge equip-own">ℹ️ Discuss Equipment with Coach</span>
+        <p class="disc-desc">The 10-metre Air Rifle is another entry-level Olympic discipline that tests a shooter's ability to hold a rifle in perfect stillness while executing a controlled trigger pull. Unlike pistol, the rifle rests against the shoulder, requiring full-body stability from foot to cheek.</p>
+        <p class="disc-desc">Air rifle demands exceptional core strength, breathing control, and mental stillness. It is widely regarded as one of the most technically demanding precision sports in the world — and one of the most rewarding to master.</p>
+        <p class="disc-desc">AGSR trains air rifle shooters in the ISSF 3-position and 10m standing formats, with our electronic targets providing instant decimal feedback on every shot.</p>
+
+      </div>
+
+      <div class="reveal-right">
+        <div style="background:var(--card-bg);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);padding:32px">
+          <h4 style="font-family:'Oswald',sans-serif;color:var(--gold);margin-bottom:20px;font-size:15px;letter-spacing:1px;text-transform:uppercase">Air Pistol vs Air Rifle</h4>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center">
+              <div style="padding:10px;background:rgba(230,51,34,0.1);border-radius:8px;border:1px solid rgba(230,51,34,0.2)"><div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--red);margin-bottom:4px">Air Pistol</div></div>
+              <div style="padding:10px;background:rgba(61,90,42,0.1);border-radius:8px;border:1px solid rgba(61,90,42,0.2)"><div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#8db86a;margin-bottom:4px">Air Rifle</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;font-size:12px">
+              <div style="text-align:right;color:rgba(255,255,255,0.6);padding:8px">One hand, standing</div>
+              <div style="font-size:10px;color:var(--grey);letter-spacing:1px;text-transform:uppercase;white-space:nowrap">HOLD</div>
+              <div style="color:rgba(255,255,255,0.6);padding:8px">Both hands, shoulder</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;font-size:12px">
+              <div style="text-align:right;color:rgba(255,255,255,0.6);padding:8px">Wrist &amp; finger</div>
+              <div style="font-size:10px;color:var(--grey);letter-spacing:1px;text-transform:uppercase;white-space:nowrap">CONTROL</div>
+              <div style="color:rgba(255,255,255,0.6);padding:8px">Full body + core</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;font-size:12px">
+              <div style="text-align:right;color:rgba(255,255,255,0.6);padding:8px">Higher freedom</div>
+              <div style="font-size:10px;color:var(--grey);letter-spacing:1px;text-transform:uppercase;white-space:nowrap">MOBILITY</div>
+              <div style="color:rgba(255,255,255,0.6);padding:8px">More stability req.</div>
+            </div>
+          </div>
+          <a href="https://wa.me/919306521724?text=Hi!%20I%20am%20interested%20in%2010m%20Air%20Rifle%20training%20at%20AGSR." target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:24px">Ask About Air Rifle 💬</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Specifications — full width -->
+    <div style="margin-top:40px;">
+      <h3 style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold);margin-bottom:20px;letter-spacing:1px;text-transform:uppercase;text-align:center;">Technical Specifications</h3>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px;">
+        <div class="spec-item"><div class="spec-label">Distance</div><div class="spec-val">10 Metres</div></div>
+        <div class="spec-item"><div class="spec-label">Position</div><div class="spec-val">Standing (Olympic)</div></div>
+        <div class="spec-item"><div class="spec-label">Qualification Shots</div><div class="spec-val">60 (Men) / 40 (Women)</div></div>
+        <div class="spec-item"><div class="spec-label">Scoring</div><div class="spec-val">Decimal (0.0 – 10.9)</div></div>
+        <div class="spec-item"><div class="spec-label">Target Ring (10)</div><div class="spec-val">0.5mm diameter</div></div>
+        <div class="spec-item"><div class="spec-label">Level</div><div class="spec-val">Beginner → Elite</div></div>
+      </div>
+    </div>
+
+    <!-- Key Skills — full width below -->
+    <div style="margin-top:40px;">
+      <h3 style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold);margin-bottom:20px;letter-spacing:1px;text-transform:uppercase;text-align:center;">Key Skills Developed</h3>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+        <div style="display:flex;gap:12px;align-items:center;padding:16px;background:var(--card-bg);border-radius:8px;border:1px solid rgba(255,255,255,0.07)"><span style="font-size:24px">🧘</span><div><div style="font-size:13px;font-weight:600;color:var(--white)">Full-Body Stillness</div><div style="font-size:12px;color:var(--grey);margin-top:3px">Holding the rifle perfectly still during the shot process</div></div></div>
+        <div style="display:flex;gap:12px;align-items:center;padding:16px;background:var(--card-bg);border-radius:8px;border:1px solid rgba(255,255,255,0.07)"><span style="font-size:24px">💨</span><div><div style="font-size:13px;font-weight:600;color:var(--white)">Breathing Control</div><div style="font-size:12px;color:var(--grey);margin-top:3px">Timing the shot between heartbeats and breaths</div></div></div>
+        <div style="display:flex;gap:12px;align-items:center;padding:16px;background:var(--card-bg);border-radius:8px;border:1px solid rgba(255,255,255,0.07)"><span style="font-size:24px">🧠</span><div><div style="font-size:13px;font-weight:600;color:var(--white)">Mental Composure</div><div style="font-size:12px;color:var(--grey);margin-top:3px">Staying focused through 60 shots over 75 minutes</div></div></div>
+        <div style="display:flex;gap:12px;align-items:center;padding:16px;background:var(--card-bg);border-radius:8px;border:1px solid rgba(255,255,255,0.07)"><span style="font-size:24px">💪</span><div><div style="font-size:13px;font-weight:600;color:var(--white)">Core Strength</div><div style="font-size:12px;color:var(--grey);margin-top:3px">Maintaining the standing position without muscle tremors</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 25M PISTOL ══════════════════════════════════════════ -->
+<section class="disc-section" id="25m-pistol" style="background:var(--black)">
+  <div class="container">
+    <div class="disc-header-band reveal">
+      <div class="disc-header-dist">25m</div>
+      <div class="disc-header-info">
+        <h2>25m Pistol</h2>
+        <p>Precision + Rapid Fire · Sports Pistol · Standard Fire · Olympic Event</p>
+      </div>
+    </div>
+    <div class="disc-grid">
+      <div class="reveal-left">
+        <span class="equip-badge equip-own">ℹ️ Intermediate Level — Discuss Equipment with Coach</span>
+        <p class="disc-desc">The 25-metre Pistol is a uniquely exciting Olympic discipline that blends two very different shooting skills — deliberate precision and split-second rapid fire. It is typically the natural progression for shooters who have mastered 10m Air Pistol.</p>
+        <p class="disc-desc">The 25m event at AGSR encompasses <strong style="color:var(--white)">two sub-disciplines</strong>: Sports Pistol (precision + rapid fire combined) and Standard Fire (multiple time-pressure series). Both demand exceptional trigger control, mental composure, and the ability to transition between focused deliberate aim and fast instinctive shooting.</p>
+
+        <h3 style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold);margin:28px 0 14px;letter-spacing:1px;text-transform:uppercase">Sub-Disciplines</h3>
+        <div class="sub-events">
+          <div class="sub-event">
+            <h4>🎯 Sports Pistol</h4>
+            <p>30 precision shots (6 minutes per group of 5) + 30 rapid fire shots (3 seconds per shot at a turning target). Total 60 shots. Tests your ability to switch between patient precision and explosive rapid fire.</p>
+          </div>
+          <div class="sub-event">
+            <h4>⚡ Standard Fire</h4>
+            <p>Five series of 5 shots each at a stationary target, with decreasing time limits: 150 seconds, then 20 seconds, then 10 seconds per series. Pure speed-accuracy trade-off under pressure.</p>
+          </div>
+          <div class="sub-event">
+            <h4>🏆 25m Rapid Fire Pistol (Advanced)</h4>
+            <p>Olympic rapid fire at 5 turning targets — 5 shots in 4 seconds, 5 shots in 6 seconds, 5 shots in 8 seconds. For advanced competitive shooters aiming for national selection.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="reveal-right">
+        <div style="background:var(--card-bg);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);padding:28px;margin-bottom:20px">
+          <h4 style="font-family:'Oswald',sans-serif;color:var(--gold);margin-bottom:16px;font-size:15px;letter-spacing:1px;text-transform:uppercase">Skills You'll Build</h4>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:10px"><span style="color:var(--gold)">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:var(--white)">Speed-accuracy balance</strong> — hitting 10s under extreme time pressure</p></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold)">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:var(--white)">Adrenaline management</strong> — staying composed during rapid-fire bursts</p></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold)">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:var(--white)">Target acquisition</strong> — finding the target instantly and shooting cleanly</p></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold)">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:var(--white)">Dual-mode shooting</strong> — switching between precision and reactive modes</p></div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(230,51,34,0.12),rgba(230,51,34,0.04));border:1px solid rgba(230,51,34,0.25);border-radius:var(--radius);padding:24px">
+          <h4 style="font-family:'Oswald',sans-serif;color:var(--red);margin-bottom:12px;font-size:14px;letter-spacing:1px;text-transform:uppercase">⚡ Recommended Progression</h4>
+          <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6">We recommend at least <strong style="color:var(--white)">6-12 months of 10m Air Pistol training</strong> before moving to 25m. The fundamentals of grip, trigger control, and mental composure must be solid before adding speed.</p>
+        </div>
+        <a href="https://wa.me/919306521724?text=Hi!%20I%20want%20to%20know%20about%2025m%20Pistol%20training%20at%20AGSR." target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px">Enquire About 25m 💬</a>
+        <div style="margin-top:24px;">
+          <h3 style="font-family:'Oswald',sans-serif;font-size:1rem;color:var(--gold);margin-bottom:14px;letter-spacing:1px;text-transform:uppercase;">Technical Specifications</h3>
+          <div class="spec-grid">
+            <div class="spec-item"><div class="spec-label">Distance</div><div class="spec-val">25 Metres</div></div>
+            <div class="spec-item"><div class="spec-label">Format</div><div class="spec-val">Precision + Rapid Fire</div></div>
+            <div class="spec-item"><div class="spec-label">Shots</div><div class="spec-val">60 (Qualification)</div></div>
+            <div class="spec-item"><div class="spec-label">Rapid Fire</div><div class="spec-val">3–8 seconds/shot</div></div>
+            <div class="spec-item"><div class="spec-label">Level</div><div class="spec-val">Intermediate+</div></div>
+            <div class="spec-item"><div class="spec-label">Prerequisite</div><div class="spec-val">10m Pistol Basics</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 50M FREE PISTOL ════════════════════════════════════ -->
+<section class="disc-section" id="50m-pistol" style="background:var(--dark)">
+  <div class="container">
+    <div class="disc-header-band reveal">
+      <div class="disc-header-dist">50m</div>
+      <div class="disc-header-info">
+        <h2>50m Free Pistol</h2>
+        <p>Pure Precision · Long Range · Advanced · Olympic Event</p>
+      </div>
+    </div>
+    <div class="disc-grid">
+      <div class="reveal-left">
+        <span class="equip-badge equip-own">⚡ Advanced Level — Personal Equipment Required</span>
+        <p class="disc-desc">The 50-metre Free Pistol is the pinnacle of Olympic precision pistol shooting — a true test of mastery. Shot at 50 metres, it demands perfect technique, extraordinary mental concentration, and complete command of the shooter's physical and psychological state.</p>
+        <p class="disc-desc">Every tiny flaw in stance, grip, or trigger control is amplified fivefold compared to 10m. This is the discipline that defines a shooter's career at the highest levels — and AGSR trains students in its exact ISSF format, building toward state and national championships.</p>
+
+        <h3 style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold);margin:28px 0 14px;letter-spacing:1px;text-transform:uppercase">Technical Specifications</h3>
+        <div class="spec-grid">
+          <div class="spec-item"><div class="spec-label">Distance</div><div class="spec-val">50 Metres</div></div>
+          <div class="spec-item"><div class="spec-label">Position</div><div class="spec-val">Standing, One Hand</div></div>
+          <div class="spec-item"><div class="spec-label">Qualification Shots</div><div class="spec-val">60 Shots</div></div>
+          <div class="spec-item"><div class="spec-label">Time Limit</div><div class="spec-val">2 Hours</div></div>
+          <div class="spec-item"><div class="spec-label">Target (10-ring)</div><div class="spec-val">5cm diameter</div></div>
+          <div class="spec-item"><div class="spec-label">Level</div><div class="spec-val">Advanced Only</div></div>
+        </div>
+
+      </div>
+
+      <div class="reveal-right">
+        <div style="background:var(--card-bg);border:1px solid rgba(245,197,24,0.2);border-radius:var(--radius);padding:32px;margin-bottom:20px">
+          <h4 style="font-family:'Oswald',sans-serif;color:var(--gold);margin-bottom:8px;font-size:15px;letter-spacing:1px;text-transform:uppercase">🏆 The Elite Discipline</h4>
+          <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:16px">50m Free Pistol has been an Olympic event since the 1896 Athens Games — the very first modern Olympics. At AGSR, training for this discipline is reserved for our most dedicated, advanced students on the national competition track.</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:10px"><span style="color:var(--gold)">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6)">Olympic Games event since 1896</p></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold)">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6)">World record: 583 / 600 (Qualification)</p></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--gold)">✦</span><p style="font-size:13px;color:rgba(255,255,255,0.6)">India has strong Olympic representation in this event</p></div>
+          </div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);padding:24px">
+          <h4 style="font-family:'Oswald',sans-serif;color:var(--gold);margin-bottom:12px;font-size:14px;letter-spacing:1px;text-transform:uppercase">Competition Pathway (50m)</h4>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><span style="font-size:13px;color:rgba(255,255,255,0.7)">🏅 District</span><span class="tag tag-olive" style="font-size:10px">Entry Level</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><span style="font-size:13px;color:rgba(255,255,255,0.7)">🏆 State (HRA)</span><span class="tag tag-gold" style="font-size:10px">Competitive</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0"><span style="font-size:13px;color:rgba(255,255,255,0.7)">🥇 National (NRAI)</span><span class="tag tag-red" style="font-size:10px">Elite</span></div>
+        </div>
+        <a href="https://wa.me/919306521724?text=Hi!%20I%20want%20to%20enquire%20about%2050m%20Free%20Pistol%20training%20at%20AGSR." target="_blank" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:20px">Enquire About 50m 💬</a>
+      </div>
+    </div>
+
+    <!-- Prerequisites — full width -->
+    <div style="margin-top:40px;">
+      <h3 style="font-family:'Oswald',sans-serif;font-size:1.1rem;color:var(--gold);margin-bottom:20px;letter-spacing:1px;text-transform:uppercase;text-align:center;">Prerequisites to Train 50m at AGSR</h3>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+        <div class="path-step"><div class="path-num">1</div><div><h5>Master 10m Air Pistol</h5><p>Consistently scoring 540+ out of 600 in qualification</p></div></div>
+        <div class="path-step"><div class="path-num">2</div><div><h5>Min. 1–2 Years Training</h5><p>Solid fundamentals across all technical elements</p></div></div>
+        <div class="path-step"><div class="path-num">3</div><div><h5>Coach Assessment</h5><p>Personal evaluation by AGSR coach before 50m training begins</p></div></div>
+        <div class="path-step"><div class="path-num">4</div><div><h5>Own Equipment</h5><p>Personal free pistol required — coach advises on options</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="comparison" style="background:var(--black);padding:80px 0">
+  <div class="container">
+    <p class="section-label" style="text-align:center">All Disciplines</p>
+    <h2 class="section-title" style="text-align:center">Quick <span>Comparison</span></h2>
+    <div class="divider" style="margin:20px auto 40px"></div>
+    <div class="compare-table-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>10m Air Pistol</th>
+            <th>10m Air Rifle</th>
+            <th>25m Pistol</th>
+            <th>50m Free Pistol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-label">Distance</td><td>10 Metres</td><td>10 Metres</td><td>25 Metres</td><td>50 Metres</td></tr>
+          <tr><td class="row-label">Type</td><td>Precision</td><td>Precision</td><td>Precision + Speed</td><td>Pure Precision</td></tr>
+          <tr><td class="row-label">Level</td><td>Beginner → Elite</td><td>Beginner → Elite</td><td>Intermediate+</td><td>Advanced Only</td></tr>
+          <tr><td class="row-label">Equipment Free</td><td><span class="check">✅ Yes — 5 Pistols</span></td><td><span class="cross">Ask Coach</span></td><td><span class="cross">Ask Coach</span></td><td><span class="cross">Own Equipment</span></td></tr>
+          <tr><td class="row-label">Electronic Target</td><td><span class="check">✅ Yes</span></td><td><span class="check">✅ Yes</span></td><td><span class="cross">Standard Target</span></td><td><span class="cross">Standard Target</span></td></tr>
+          <tr><td class="row-label">Olympic Event</td><td><span class="check">✅ Yes</span></td><td><span class="check">✅ Yes</span></td><td><span class="check">✅ Yes</span></td><td><span class="check">✅ Yes</span></td></tr>
+          <tr><td class="row-label">Shots (Qualification)</td><td>60 (M) / 40 (W)</td><td>60 (M) / 40 (W)</td><td>60</td><td>60</td></tr>
+          <tr><td class="row-label">Indoor/Outdoor</td><td>Indoor</td><td>Indoor</td><td>Semi-outdoor</td><td>Outdoor</td></tr>
+          <tr><td class="row-label">Recommended For</td><td>Everyone</td><td>Everyone</td><td>After 10m mastery</td><td>Competitive elite</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div class="container">
+    <div class="cta-inner" style="flex-direction:column; align-items:center; text-align:center;">
+      <div>
+        <h2>Not Sure Which <span>Discipline?</span></h2>
+        <p>WhatsApp us and our coach will guide you to the perfect starting point based on your age, goals, and experience.</p>
+      </div>
+      <div class="cta-btns" style="justify-content:center;">
+        <a href="https://wa.me/919306521724?text=Hi!%20I%20need%20help%20choosing%20the%20right%20shooting%20discipline%20for%20me." target="_blank" class="btn btn-primary">💬 Get Guidance Now</a>
+        <a href="contact.html" class="btn btn-outline">Send an Enquiry</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'"/>
+          <div class="logo-name"><span>AG</span>SR Sonipat<br><small style="font-size:11px;color:var(--grey);font-weight:400;letter-spacing:2px">SHOOTING RANGE</small></div>
+        </div>
+        <p>Aryan Gateways Shooting Range — Sonipat's premier shooting academy delivering ISSF-standard Olympic training since 2016.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/919306521724" target="_blank" class="footer-social-btn">💬</a>
+          <a href="tel:+919306521724" class="footer-social-btn">📞</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="offer.html">Our Offer</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Disciplines</h4><ul><li><a href="#10m-pistol">10m Air Pistol</a></li><li><a href="#10m-rifle">10m Air Rifle</a></li><li><a href="#25m-pistol">25m Pistol</a></li><li><a href="#50m-pistol">50m Free Pistol</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><p class="fc-info"><strong>📞 Call / WhatsApp</strong><br>+91 93065 21724<br><br><strong>📍 Location</strong><br>Sonipat, Haryana<br><br><strong>🕐 Open Daily</strong><br>Morning &amp; Evening Batches</p></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aryan Gateways Shooting Range, Sonipat. All Rights Reserved.</p>
+      <div class="affil"><span class="affil-badge">NRAI Affiliated</span><span class="affil-badge">Haryana Rifle Assoc.</span><span class="affil-badge">ISSF Standard</span></div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919306521724" target="_blank" class="wa-float">💬<span class="wa-tooltip">Chat with us!</span></a>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); }});
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

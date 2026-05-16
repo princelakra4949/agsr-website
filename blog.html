@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | AGSR Sonipat — Shooting Tips, News & Academy Updates</title>
+  <meta name="description" content="Shooting tips, training advice, NRAI news, and AGSR academy updates. Your resource for becoming a better shooter in India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & ROOT VARIABLES
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --olive:   #3d5a2a;
+      --olive-dk:#2a3f1c;
+      --olive-lt:#567a3a;
+      --black:   #0d0d0d;
+      --dark:    #141414;
+      --card-bg: #1c1c1c;
+      --red:     #e63322;
+      --red-lt:  #ff4433;
+      --gold:    #f5c518;
+      --gold-lt: #ffd740;
+      --white:   #ffffff;
+      --grey:    #aaaaaa;
+      --light:   #f2f2f2;
+      --radius:  12px;
+      --shadow:  0 8px 32px rgba(0,0,0,0.45);
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--olive); border-radius: 3px; }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--white);
+    }
+    .section-title span { color: var(--gold); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-primary { background: var(--red); color: var(--white); }
+    .btn-primary:hover { background: var(--red-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,51,34,0.4); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: var(--black); }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,197,24,0.4); }
+    .tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .tag-red  { background: rgba(230,51,34,0.15); color: var(--red); border: 1px solid rgba(230,51,34,0.3); }
+    .tag-gold { background: rgba(245,197,24,0.15); color: var(--gold); border: 1px solid rgba(245,197,24,0.3); }
+    .tag-olive { background: rgba(61,90,42,0.3); color: #8db86a; border: 1px solid rgba(61,90,42,0.5); }
+    .divider { width: 60px; height: 4px; background: var(--red); border-radius: 2px; margin: 20px 0 32px; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px;
+      transition: var(--transition);
+    }
+    #navbar.scrolled {
+      background: rgba(13,13,13,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 48px; width: 48px; object-fit: contain; border-radius: 50%; }
+    .nav-logo-text { line-height: 1.2; }
+    .nav-logo-text .name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px; font-weight: 700; letter-spacing: 1px;
+    }
+    .nav-logo-text .name span { color: var(--gold); }
+    .nav-logo-text .sub { font-size: 10px; letter-spacing: 3px; color: var(--grey); text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.75); transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--gold); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .nav-wa {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; background: #25D366; border-radius: 4px;
+      font-family: 'Oswald', sans-serif; font-size: 13px;
+      letter-spacing: 0.5px; font-weight: 600; transition: var(--transition);
+    }
+    .nav-wa:hover { background: #20bf5b; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: var(--transition); }
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0;
+      background: rgba(13,13,13,0.98); backdrop-filter: blur(12px);
+      padding: 24px; flex-direction: column; gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08); z-index: 999;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px; letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.8); padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08); transition: var(--transition);
+    }
+    .mobile-menu a:hover, .mobile-menu a.active { color: var(--gold); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative; min-height: 60vh;
+      display: flex; align-items: center;
+      background: var(--black); overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a2a10 50%, #0d0d0d 100%);
+    }
+    .crosshair-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: flex-end;
+      pointer-events: none; overflow: hidden;
+    }
+    .crosshair-svg {
+      width: 55vw; max-width: 700px; opacity: 0.12;
+      animation: rotateSlow 60s linear infinite;
+      transform-origin: center;
+    }
+    @keyframes rotateSlow { to { transform: rotate(360deg); } }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(13,13,13,1) 40%, rgba(13,13,13,0.2) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 120px 24px 80px;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(61,90,42,0.3);
+      border: 1px solid rgba(61,90,42,0.6);
+      padding: 6px 16px; border-radius: 50px;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #8db86a; margin-bottom: 28px;
+    }
+    .hero-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8db86a; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 700; line-height: 1.0; margin-bottom: 8px;
+    }
+    .hero-title .line1 { color: var(--white); }
+    .hero-title .line2 { color: var(--gold); }
+    .hero-tagline {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 400;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin: 20px 0 16px;
+    }
+    .hero-tagline span { color: var(--gold); font-weight: 600; }
+    .hero-desc {
+      font-size: 16px; line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      max-width: 560px; margin-bottom: 40px;
+    }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* breadcrumb */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--grey); margin-bottom: 24px;
+    }
+    .breadcrumb a { color: var(--gold); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.3); }
+
+    /* ============================================================
+       STATS BAR
+    ============================================================ */
+    #stats {
+      background: var(--olive-dk);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item {
+      padding: 32px 24px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      transition: var(--transition); cursor: default;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:hover { background: rgba(255,255,255,0.05); }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem; line-height: 1;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .stat-label { font-size: 13px; letter-spacing: 1px; color: rgba(255,255,255,0.7); text-transform: uppercase; font-weight: 500; }
+    .stat-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+    /* ============================================================
+       FILTER BAR
+    ============================================================ */
+    .filter-bar {
+      background: var(--dark);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 28px 0;
+    }
+    .filter-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-tab {
+      padding: 8px 20px; border-radius: 50px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px; letter-spacing: 1.5px;
+      text-transform: uppercase; font-weight: 600;
+      cursor: pointer; border: 1px solid rgba(255,255,255,0.12);
+      background: transparent; color: var(--grey);
+      transition: var(--transition);
+    }
+    .filter-tab:hover { border-color: var(--olive-lt); color: var(--white); }
+    .filter-tab.active { background: var(--olive); color: var(--white); border-color: var(--olive); }
+    .post-count { font-size: 13px; color: var(--grey); }
+    .post-count span { color: var(--gold); font-weight: 700; }
+
+    /* ============================================================
+       BLOG GRID
+    ============================================================ */
+    .blog-section { padding: 60px 0 100px; background: var(--black); }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .blog-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover {
+      border-color: var(--olive);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .card-thumb {
+      position: relative; height: 200px; overflow: hidden;
+      background: linear-gradient(135deg, var(--olive-dk), var(--dark));
+    }
+    .card-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .blog-card:hover .card-thumb img { transform: scale(1.06); }
+    .thumb-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; opacity: 0.4;
+    }
+    .card-cat {
+      position: absolute; top: 14px; left: 14px;
+      padding: 4px 12px; border-radius: 50px;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .cat-training  { background: rgba(61,90,42,0.9);  color: var(--white); }
+    .cat-news      { background: rgba(230,51,34,0.9);  color: var(--white); }
+    .cat-equipment { background: rgba(245,197,24,0.9); color: var(--black); }
+    .cat-academy   { background: rgba(255,255,255,0.2); color: var(--white); }
+    .cat-technique { background: rgba(61,90,42,0.9);  color: var(--white); }
+    .cat-nutrition { background: rgba(255,165,0,0.9); color: var(--black); }
+
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .card-meta {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 10px; font-size: 12px; color: var(--grey);
+    }
+    .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--grey); }
+    .card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white); line-height: 1.3;
+      margin-bottom: 10px; transition: var(--transition);
+    }
+    .blog-card:hover .card-title { color: var(--gold); }
+    .card-excerpt { font-size: 13px; color: var(--grey); line-height: 1.6; flex: 1; margin-bottom: 20px; }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .card-author { display: flex; align-items: center; gap: 8px; }
+    .author-av {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--olive);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+    }
+    .author-name { font-size: 12px; color: var(--grey); }
+    .read-link {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 4px; transition: var(--transition);
+    }
+    .read-link:hover { color: var(--gold-lt); gap: 8px; }
+
+    /* Featured post */
+    .featured-post {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .featured-post .card-thumb { height: 100%; min-height: 280px; }
+    .featured-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px; border-radius: 50px;
+      background: rgba(245,197,24,0.15); border: 1px solid rgba(245,197,24,0.3);
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .featured-post .card-title { font-size: 1.4rem; }
+    .featured-post .card-excerpt { font-size: 14px; }
+
+    /* Empty state */
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 20px; }
+    .empty-state .emoji { font-size: 56px; margin-bottom: 20px; }
+    .empty-state h3 { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--white); margin-bottom: 8px; }
+    .empty-state p { color: var(--grey); font-size: 14px; }
+
+    /* Pagination */
+    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 48px; }
+    .page-btn {
+      width: 40px; height: 40px; border-radius: 6px;
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08);
+      color: var(--grey); font-size: 14px; cursor: pointer; transition: var(--transition);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .page-btn:hover, .page-btn.active { background: var(--olive); border-color: var(--olive); color: var(--white); }
+
+    /* ============================================================
+       NEWSLETTER STRIP
+    ============================================================ */
+    .newsletter-section { padding: 0 0 80px; background: var(--black); }
+    .newsletter-strip {
+      background: linear-gradient(135deg, var(--olive-dk) 0%, rgba(61,90,42,0.15) 100%);
+      border: 1px solid rgba(61,90,42,0.3);
+      border-radius: var(--radius);
+      padding: 56px 48px; text-align: center;
+    }
+    .newsletter-strip h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem; color: var(--white); margin-bottom: 10px;
+    }
+    .newsletter-strip p { color: var(--grey); font-size: 15px; margin-bottom: 32px; line-height: 1.7; }
+    .nl-form { display: flex; gap: 12px; max-width: 400px; margin: 0 auto; flex-wrap: wrap; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #080808;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 60px 0 0;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 60px; }
+    .footer-brand .logo-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-brand .logo-wrap img { height: 52px; width: 52px; object-fit: contain; border-radius: 50%; }
+    .footer-brand .logo-name { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; line-height: 1.2; }
+    .footer-brand .logo-name span { color: var(--gold); }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; margin-bottom: 24px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social-btn {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.08); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: var(--transition);
+    }
+    .footer-social-btn:hover { background: var(--olive); }
+    .footer-col h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.45); transition: var(--transition); }
+    .footer-col ul li a:hover { color: var(--white); padding-left: 4px; }
+    .footer-col .fc-info { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+    .footer-col .fc-info strong { color: rgba(255,255,255,0.7); font-weight: 600; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .footer-bottom .affil { display: flex; align-items: center; gap: 16px; }
+    .affil-badge {
+      padding: 4px 12px; border-radius: 50px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.4); text-transform: uppercase;
+    }
+
+    /* ============================================================
+       WHATSAPP FLOAT
+    ============================================================ */
+    .wa-float {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 60px; height: 60px; background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.45);
+      transition: var(--transition);
+      animation: waPulse 3s infinite;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,0.6); animation: none; }
+    @keyframes waPulse {
+      0%,100%{box-shadow:0 8px 24px rgba(37,211,102,0.45)}
+      50%{box-shadow:0 8px 32px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.15)}
+    }
+    .wa-tooltip {
+      position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+      background: #0d0d0d; color: white;
+      padding: 8px 14px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; white-space: nowrap;
+      box-shadow: var(--shadow);
+      opacity: 0; pointer-events: none; transition: var(--transition);
+    }
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
+    /* ============================================================
+       ANIMATIONS (scroll-reveal)
+    ============================================================ */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left  { opacity: 0; transform: translateX(-32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal-left.visible  { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 1000px) {
+      .blog-grid { grid-template-columns: 1fr 1fr; }
+      .featured-post { grid-column: auto; grid-template-columns: 1fr; }
+      .featured-post .card-thumb { height: 220px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .newsletter-strip { padding: 40px 24px; }
+    }
+    @media (max-width: 640px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.5rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'" />
+      <div class="nav-logo-text">
+        <div class="name"><span>AG</span>SR Sonipat</div>
+        <div class="sub">Shooting Academy</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="offer.html">Our Offer</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Enroll Now</a>
+      <a href="https://wa.me/919306521724" target="_blank" class="nav-wa">
+        <span>💬</span> WhatsApp
+      </a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" onclick="toggleMenu()">About Us</a>
+  <a href="offer.html" onclick="toggleMenu()">Our Offer</a>
+  <a href="blog.html" class="active" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact Us</a>
+  <a href="https://wa.me/919306521724" target="_blank">💬 WhatsApp Us</a>
+</div>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="crosshair-bg">
+    <svg class="crosshair-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="250" cy="250" r="240" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="190" fill="none" stroke="#e63322" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="140" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="90"  fill="none" stroke="#e63322" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="40"  fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <line x1="250" y1="0" x2="250" y2="500" stroke="#ffffff" stroke-width="1.5"/>
+      <line x1="0" y1="250" x2="500" y2="250" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="8" fill="#e63322"/>
+      <line x1="250" y1="5"   x2="250" y2="20"  stroke="#ffffff" stroke-width="2"/>
+      <line x1="250" y1="480" x2="250" y2="495" stroke="#ffffff" stroke-width="2"/>
+      <line x1="5"   y1="250" x2="20"  y2="250" stroke="#ffffff" stroke-width="2"/>
+      <line x1="480" y1="250" x2="495" y2="250" stroke="#ffffff" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📰 Knowledge Hub</div>
+    <h1 class="hero-title">
+      <div class="line1">AGSR</div>
+      <div class="line2">Blog &amp; News</div>
+    </h1>
+    <p class="hero-tagline">Train Smarter · <span>Shoot Better</span></p>
+    <p class="hero-desc">
+      Practical shooting guides, mental focus tips, NRAI news, equipment reviews, and updates straight from the AGSR Sonipat coaching team.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/919306521724?text=Hi!%20I%20am%20interested%20in%20joining%20AGSR%20Sonipat%20Shooting%20Academy" target="_blank" class="btn btn-primary">🎯 Join the Academy</a>
+      <a href="index.html#disciplines" class="btn btn-outline">View Disciplines</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+============================================================ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num">9+</div>
+      <div class="stat-label">Years Experience</div>
+      <div class="stat-sub">Est. 2016</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Electronic Targets</div>
+      <div class="stat-sub">Latest Technology</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Pistols for Beginners</div>
+      <div class="stat-sub">No Purchase Needed</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Olympic Events</div>
+      <div class="stat-sub">ISSF Standard</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILTER BAR
+============================================================ -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" data-cat="all">All Posts</button>
+        <button class="filter-tab" data-cat="training">Training</button>
+        <button class="filter-tab" data-cat="technique">Technique</button>
+        <button class="filter-tab" data-cat="equipment">Equipment</button>
+        <button class="filter-tab" data-cat="news">News</button>
+        <button class="filter-tab" data-cat="academy">Academy</button>
+        <button class="filter-tab" data-cat="nutrition">Nutrition</button>
+      </div>
+      <div class="post-count">
+        <span id="visibleCount">—</span> posts
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     BLOG GRID
+============================================================ -->
+<section class="blog-section">
+  <div class="container">
+    <div class="blog-grid" id="blogGrid">
+      <!-- Posts rendered by JS -->
+      <div class="empty-state">
+        <div class="emoji">⏳</div>
+        <h3>Loading posts…</h3>
+        <p>Fetching the latest from AGSR.</p>
+      </div>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEWSLETTER
+============================================================ -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-strip reveal">
+      <div class="section-label">Stay Updated</div>
+      <h3>Get Shooting Tips in Your WhatsApp</h3>
+      <p>Join 200+ shooters already in our AGSR Tips community. Get weekly training tips, news and academy updates delivered directly to your WhatsApp.</p>
+      <div class="nl-form">
+        <a href="https://wa.me/919306521724?text=Hi%20AGSR%2C%20please%20add%20me%20to%20your%20shooting%20tips%20WhatsApp%20group."
+           target="_blank" class="btn btn-gold" style="width:100%;justify-content:center">
+          💬 Join WhatsApp Group
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'" />
+          <div class="logo-name"><span>AG</span>SR Sonipat<br><small style="font-size:12px;color:var(--grey);font-weight:400;letter-spacing:2px">SHOOTING RANGE</small></div>
+        </div>
+        <p>Aryan Gateways Shooting Range — Sonipat's premier shooting academy delivering ISSF-standard Olympic training since 2016. Making shooting accessible and affordable for everyone.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/919306521724" target="_blank" class="footer-social-btn" title="WhatsApp">💬</a>
+          <a href="tel:+919306521724" class="footer-social-btn" title="Call">📞</a>
+          <a href="mailto:agsr.sonipat@gmail.com" class="footer-social-btn" title="Email">✉️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="offer.html">Our Offer</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Blog Categories</h4>
+        <ul>
+          <li><a href="#" onclick="filterCat('training');return false">Training Tips</a></li>
+          <li><a href="#" onclick="filterCat('technique');return false">Technique</a></li>
+          <li><a href="#" onclick="filterCat('equipment');return false">Equipment</a></li>
+          <li><a href="#" onclick="filterCat('news');return false">NRAI News</a></li>
+          <li><a href="#" onclick="filterCat('academy');return false">Academy Updates</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="fc-info">
+          <strong>📞 Call / WhatsApp</strong><br>
+          +91 93065 21724<br><br>
+          <strong>📍 Location</strong><br>
+          Sonipat, Haryana<br>India<br><br>
+          <strong>🕐 Hours</strong><br>
+          Open Daily<br>Morning &amp; Evening Batches
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Aryan Gateways Shooting Range, Sonipat. All rights reserved.</p>
+      <div class="affil">
+        <span class="affil-badge">NRAI Affiliated</span>
+        <span class="affil-badge">Haryana Rifle Assoc.</span>
+        <span class="affil-badge">ISSF Standard</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919306521724?text=Hi%20AGSR!%20I%20want%20to%20know%20more%20about%20joining%20your%20shooting%20academy." target="_blank" class="wa-float">
+  💬
+  <span class="wa-tooltip">Chat with us!</span>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  /* ── Static seed posts ── */
+  const SEED_POSTS = [
+    {
+      id: 1, slug: 'why-air-pistol-best-beginner',
+      title: 'Why 10m Air Pistol is the Best Discipline for Beginners',
+      excerpt: 'Affordable, safe, and deeply rewarding — here is why most coaches recommend starting your shooting journey with 10m Air Pistol.',
+      category: 'training', cover_image: '', tags: 'beginner,air pistol,10m',
+      author: 'AGSR Team', created_at: '2024-09-15', featured: true
+    },
+    {
+      id: 2, slug: 'shooting-mental-focus-guide',
+      title: 'The Mental Game: How to Build Focus on the Firing Line',
+      excerpt: 'Shooting is 80% mental. Learn the breathing, focus, and pre-shot routine techniques used by national-level coaches.',
+      category: 'technique', cover_image: '', tags: 'mental,focus,technique',
+      author: 'AGSR Team', created_at: '2024-10-02'
+    },
+    {
+      id: 3, slug: 'choosing-first-air-pistol',
+      title: "Choosing Your First Air Pistol — A Complete Buyer's Guide",
+      excerpt: 'Walther, Morini, Steyr, or Hammerli? We break down the top options for Indian shooters across every budget.',
+      category: 'equipment', cover_image: '', tags: 'equipment,air pistol,buying guide',
+      author: 'AGSR Team', created_at: '2024-10-18'
+    },
+    {
+      id: 4, slug: 'issf-world-cup-2024-recap',
+      title: "ISSF World Cup 2024 — India's Performance and What It Means",
+      excerpt: 'Indian shooters had an outstanding run at the 2024 World Cup. Here is a full analysis and what young shooters can learn from it.',
+      category: 'news', cover_image: '', tags: 'ISSF,world cup,India,news',
+      author: 'AGSR Team', created_at: '2024-11-05'
+    },
+    {
+      id: 5, slug: 'agsr-students-district-championship',
+      title: 'AGSR Students Win 4 Medals at Haryana District Championship',
+      excerpt: 'We are proud to announce that six AGSR students competed at the Haryana District Championships — and brought home four medals!',
+      category: 'academy', cover_image: '', tags: 'achievement,Haryana,championship',
+      author: 'AGSR Team', created_at: '2024-11-20'
+    },
+  ];
+
+  const CATEGORY_EMOJIS = {
+    training: '🎯', technique: '🧠', equipment: '🔫',
+    news: '📰', academy: '🏆', nutrition: '🥗', general: '📝'
+  };
+  const CATEGORY_LABELS = {
+    training: 'Training', technique: 'Technique', equipment: 'Equipment',
+    news: 'News', academy: 'Academy', nutrition: 'Nutrition', general: 'General'
+  };
+
+  let allPosts   = [];
+  let currentCat = 'all';
+  const PAGE_SIZE = 9;
+  let currentPage = 1;
+
+  /* ── Fetch posts ── */
+  async function loadPosts() {
+    try {
+      const res = await fetch('/api/blog?limit=50');
+      if (res.ok) {
+        const data = await res.json();
+        allPosts = data.data.length ? data.data : SEED_POSTS;
+      } else {
+        allPosts = SEED_POSTS;
+      }
+    } catch {
+      allPosts = SEED_POSTS;
+    }
+    renderPosts();
+  }
+
+  /* ── Render posts ── */
+  function renderPosts() {
+    const filtered = currentCat === 'all'
+      ? allPosts
+      : allPosts.filter(p => p.category === currentCat);
+
+    const total = filtered.length;
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    currentPage = Math.min(currentPage, totalPages || 1);
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const page  = filtered.slice(start, start + PAGE_SIZE);
+
+    document.getElementById('visibleCount').textContent = total;
+
+    const grid = document.getElementById('blogGrid');
+    if (!page.length) {
+      grid.innerHTML = `<div class="empty-state">
+        <div class="emoji">📝</div>
+        <h3>No Posts Yet</h3>
+        <p>Check back soon — the AGSR blog is being set up!</p>
+      </div>`;
+      document.getElementById('pagination').innerHTML = '';
+      return;
+    }
+
+    grid.innerHTML = page.map((post, i) => renderCard(post, i === 0 && currentPage === 1 && currentCat === 'all')).join('');
+    observeReveal();
+
+    const pag = document.getElementById('pagination');
+    if (totalPages <= 1) { pag.innerHTML = ''; return; }
+    let pagHTML = '';
+    for (let p = 1; p <= totalPages; p++) {
+      pagHTML += `<button class="page-btn ${p === currentPage ? 'active' : ''}" onclick="goPage(${p})">${p}</button>`;
+    }
+    pag.innerHTML = pagHTML;
+  }
+
+  function renderCard(post, featured = false) {
+    const cat      = post.category || 'general';
+    const emoji    = CATEGORY_EMOJIS[cat] || '📝';
+    const catLabel = CATEGORY_LABELS[cat] || cat;
+    const dateStr  = post.created_at ? new Date(post.created_at).toLocaleDateString('en-IN', { year:'numeric', month:'short', day:'numeric'}) : '';
+    const initials = (post.author || 'AGSR').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+    const imgHTML = post.cover_image
+      ? `<img src="${post.cover_image}" alt="${post.title}" onerror="this.style.display='none'">`
+      : '';
+    const placeholderStyle = post.cover_image ? 'display:none' : '';
+
+    if (featured) {
+      return `
+      <a href="blog-post.html?slug=${post.slug}" class="blog-card featured-post reveal">
+        <div class="card-thumb">
+          ${imgHTML}
+          <div class="thumb-placeholder" style="${placeholderStyle}">${emoji}</div>
+          <span class="card-cat cat-${cat}">${catLabel}</span>
+        </div>
+        <div class="card-body">
+          <span class="featured-badge">⭐ Featured Post</span>
+          <div class="card-meta">
+            <span>${dateStr}</span>
+            <span class="dot"></span>
+            <span>5 min read</span>
+          </div>
+          <div class="card-title">${post.title}</div>
+          <div class="card-excerpt">${post.excerpt || ''}</div>
+          <div class="card-footer">
+            <div class="card-author">
+              <div class="author-av">${initials}</div>
+              <span class="author-name">${post.author || 'AGSR Team'}</span>
+            </div>
+            <span class="read-link">Read More →</span>
+          </div>
+        </div>
+      </a>`;
+    }
+
+    return `
+    <a href="blog-post.html?slug=${post.slug}" class="blog-card reveal">
+      <div class="card-thumb">
+        ${imgHTML}
+        <div class="thumb-placeholder" style="${placeholderStyle}">${emoji}</div>
+        <span class="card-cat cat-${cat}">${catLabel}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span>${dateStr}</span>
+          <span class="dot"></span>
+          <span>4 min read</span>
+        </div>
+        <div class="card-title">${post.title}</div>
+        <div class="card-excerpt">${post.excerpt || ''}</div>
+        <div class="card-footer">
+          <div class="card-author">
+            <div class="author-av">${initials}</div>
+            <span class="author-name">${post.author || 'AGSR Team'}</span>
+          </div>
+          <span class="read-link">Read More →</span>
+        </div>
+      </div>
+    </a>`;
+  }
+
+  function goPage(p) {
+    currentPage = p;
+    renderPosts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function filterCat(cat) {
+    currentCat  = cat;
+    currentPage = 1;
+    document.querySelectorAll('.filter-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.cat === cat);
+    });
+    renderPosts();
+  }
+
+  /* ── Filter tabs ── */
+  document.getElementById('filterTabs').addEventListener('click', e => {
+    const tab = e.target.closest('.filter-tab');
+    if (!tab) return;
+    filterCat(tab.dataset.cat);
+  });
+
+  /* ── Navbar scroll effect ── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  /* ── Mobile menu ── */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  document.addEventListener('click', e => {
+    const menu      = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  /* ── Scroll reveal ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.10 });
+
+  function observeReveal() {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+  }
+
+  /* ── Counter animation for stats ── */
+  function animateCounter(el, target, suffix = '') {
+    let start = 0;
+    const duration = 1800;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(ease * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-num').forEach(el => {
+          const val = parseInt(el.textContent);
+          animateCounter(el, val, el.textContent.includes('+') ? '+' : '');
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsSection = document.getElementById('stats');
+  if (statsSection) statsObserver.observe(statsSection);
+
+  /* ── Init ── */
+  loadPosts().then(() => setTimeout(observeReveal, 100));
+</script>
+
+</body>
+</html>
