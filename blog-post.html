@@ -12,32 +12,23 @@
   <style>
     /* ── Post-specific ── */
 
-    /* Hero */
+    /* Hero — matches standard page-hero style */
     .post-hero {
       position: relative;
-      min-height: 420px;
-      display: flex; align-items: flex-end;
-      padding-bottom: 60px;
+      padding: 140px 24px 80px;
+      background: linear-gradient(135deg, var(--olive-dk) 0%, var(--black) 60%);
       overflow: hidden;
     }
-    .post-hero-bg {
+    .post-hero::before {
+      content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, var(--olive-dk), var(--black));
+      background: radial-gradient(ellipse at 70% 50%, rgba(61,90,42,0.3) 0%, transparent 70%);
     }
-    .post-hero-img {
-      position: absolute; inset: 0;
-      object-fit: cover; width: 100%; height: 100%;
-      opacity: 0.2;
+    .post-hero-crosshair {
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      opacity: 0.07; width: 340px; height: 340px; pointer-events: none;
     }
-    .post-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, var(--black) 0%, transparent 60%);
-    }
-    .post-hero-nav {
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 80px;
-    }
-    .post-hero .container { position: relative; z-index: 1; }
+    .post-hero .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
     .breadcrumb { display:flex;align-items:center;gap:8px;font-size:13px;color:var(--grey);margin-bottom:20px; }
     .breadcrumb a { color:var(--gold); }
     .breadcrumb .sep { color:rgba(255,255,255,0.3); }
@@ -64,10 +55,10 @@
 
     .post-hero h1 {
       font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.6rem, 4vw, 2.8rem);
-      font-weight: 700; line-height: 1.15;
-      color: var(--white); max-width: 780px;
-      margin-bottom: 20px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 700; line-height: 1.1;
+      color: var(--white); max-width: 820px;
+      margin-bottom: 24px;
     }
 
     .post-author-row {
@@ -275,44 +266,71 @@
       .post-sidebar { position: static; display: none; }
     }
     @media (max-width: 600px) {
-      .post-hero { min-height: 320px; }
-      .post-hero h1 { font-size: 1.5rem; }
+      .post-hero { padding: 120px 20px 60px; }
+      .post-hero h1 { font-size: 1.6rem; }
+      .post-hero-crosshair { display: none; }
     }
   </style>
 </head>
 <body>
 
 <!-- ═══════════════════ NAVBAR ═══════════════════ -->
-<nav class="navbar scrolled" id="navbar">
-  <div class="nav-container">
+<nav id="navbar">
+  <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="agsr-logo.jpg" alt="AGSR Logo"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <div class="logo-fallback" style="display:none">
-        <span class="lf-circle">AG</span>
-        <div><span class="lf-name">AGSR</span><span class="lf-tag">Sonipat</span></div>
+      <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'" />
+      <div class="nav-logo-text">
+        <div class="name"><span>AG</span>SR Sonipat</div>
+        <div class="sub">Shooting Academy</div>
       </div>
     </a>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About Us</a></li>
       <li><a href="offer.html">Our Offer</a></li>
       <li><a href="blog.html" class="active">Blog</a></li>
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
-    <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Enroll Now</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Enroll Now</a>
+      <a href="https://wa.me/919306521724" target="_blank" class="nav-wa">
+        <span>💬</span> WhatsApp
+      </a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
-    </button>
+    </div>
   </div>
 </nav>
 
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="offer.html">Our Offer</a>
+  <a href="blog.html" class="active">Blog</a>
+  <a href="contact.html">Contact Us</a>
+  <a href="https://wa.me/919306521724" target="_blank">💬 WhatsApp Us</a>
+</div>
+
 <!-- ═══════════════════ POST HERO (populated by JS) ═══════════════════ -->
 <section class="post-hero" id="postHero" style="display:none">
-  <div class="post-hero-bg"></div>
-  <img class="post-hero-img" id="heroCover" src="" alt="" onerror="this.style.display='none'"/>
-  <div class="post-hero-overlay"></div>
-  <div class="container" style="padding-top:80px">
+  <!-- Crosshair watermark -->
+  <svg class="post-hero-crosshair" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" r="240" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="250" cy="250" r="190" fill="none" stroke="#e63322" stroke-width="1.5"/>
+    <circle cx="250" cy="250" r="140" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="250" cy="250" r="90"  fill="none" stroke="#e63322" stroke-width="1.5"/>
+    <circle cx="250" cy="250" r="40"  fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <line x1="250" y1="0" x2="250" y2="500" stroke="#ffffff" stroke-width="1.5"/>
+    <line x1="0" y1="250" x2="500" y2="250" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="250" cy="250" r="8" fill="#e63322"/>
+    <line x1="250" y1="5"   x2="250" y2="20"  stroke="#ffffff" stroke-width="2"/>
+    <line x1="250" y1="480" x2="250" y2="495" stroke="#ffffff" stroke-width="2"/>
+    <line x1="5"   y1="250" x2="20"  y2="250" stroke="#ffffff" stroke-width="2"/>
+    <line x1="480" y1="250" x2="495" y2="250" stroke="#ffffff" stroke-width="2"/>
+  </svg>
+  <div class="container">
     <div class="breadcrumb">
       <a href="index.html">Home</a>
       <span class="sep">›</span>
@@ -716,10 +734,9 @@ function copyLink() {
 /* ── Navbar ── */
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
-document.getElementById('navToggle').addEventListener('click', function() {
-  document.getElementById('navLinks').classList.toggle('open');
-  this.classList.toggle('active');
-});
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
 
 /* ── Init ── */
 loadPost();
