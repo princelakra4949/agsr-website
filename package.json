@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build": "PAYLOAD_CONFIG_PATH=payload.config.js payload build",
-    "build:payload": "PAYLOAD_CONFIG_PATH=payload.config.js payload build",
+    "build": "node --max-old-space-size=1536 ./node_modules/.bin/payload build",
+    "build:payload": "node --max-old-space-size=1536 ./node_modules/.bin/payload build",
     "generate:types": "payload generate:types"
   },
   "dependencies": {
