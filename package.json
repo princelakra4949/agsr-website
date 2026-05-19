@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build": "payload build",
-    "build:payload": "payload build",
+    "build": "PAYLOAD_CONFIG_PATH=payload.config.js payload build",
+    "build:payload": "PAYLOAD_CONFIG_PATH=payload.config.js payload build",
     "generate:types": "payload generate:types"
   },
   "dependencies": {
@@ -21,6 +21,6 @@
   "author": "AGSR Sonipat",
   "license": "ISC",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "18.x"
   }
 }
