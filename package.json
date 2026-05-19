@@ -1,18 +1,26 @@
 {
   "name": "agsr-sonipat-website",
-  "version": "1.0.0",
-  "description": "AGSR Sonipat Shooting Academy — Full Stack Website",
+  "version": "2.0.0",
+  "description": "AGSR Sonipat Shooting Academy - Website with Payload CMS",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build:payload": "payload build",
+    "generate:types": "payload generate:types"
   },
   "dependencies": {
     "better-sqlite3": "^9.4.3",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "payload": "^2.32.3"
   },
   "keywords": ["shooting", "academy", "sonipat", "AGSR"],
   "author": "AGSR Sonipat",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

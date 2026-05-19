@@ -23,7 +23,4 @@ npm-debug.log*
 
 # Build output
 dist/
-build/
-
-# Vercel
-.vercel
+# Note: build/ is NOT ign
