@@ -1,7 +1,14 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/payload.js",
-      "use": "@vercel/node",
-      "config": { "maxLambdaSize": "50mb" }
+  "functions": {
+    "api/payload.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/payload" },
+    { "source": "/admin/:path*", "destination": "/api/payload" },
+    { "source": "/admin", "destination": "/api/payload" },
+    { "source": "/media/:path*", "destination": "/api/payload" }
+  ]
+}
