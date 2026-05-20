@@ -17,6 +17,9 @@ cp index.html about.html blog.html blog-post.html contact.html offer.html public
 # ── CSS ─────────────────────────────────────────────────────────
 cp shared.css public/
 
+# ── Root SVG / logos ─────────────────────────────────────────────
+cp logo.svg public/ 2>/dev/null || true
+
 # ── Root images ──────────────────────────────────────────────────
 cp agsr-logo.jpg range.jpg gallery2.jpg public/ 2>/dev/null || true
 
