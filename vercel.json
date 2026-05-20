@@ -2,7 +2,8 @@
   "version": 2,
   "functions": {
     "api/payload.js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "src/**,payload.config.js"
     }
   },
   "rewrites": [

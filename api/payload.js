@@ -7,6 +7,9 @@ const path     = require('path')
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
+// Explicitly require config so Vercel's bundler includes it (and all collections)
+const payloadConfig = require('../payload.config')
+
 // Cache between warm invocations
 let cachedApp = null
 
@@ -16,6 +19,7 @@ const initPayload = async () => {
   const app = express()
 
   await payload.init({
+    config:   payloadConfig,
     secret:   process.env.PAYLOAD_SECRET || 'agsr-payload-secret-2024',
     mongoURL: process.env.MONGODB_URI,
     express:  app,
