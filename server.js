@@ -7,7 +7,6 @@
 const express = require('express');
 const path    = require('path');
 const cors    = require('cors');
-const Database = require('better-sqlite3');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -18,54 +17,61 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));   // serve HTML/CSS/JS/images
 
-// ── Database Setup ───────────────────────────────────────────
-const db = new Database(path.join(__dirname, 'agsr.db'));
+// ── Database Setup (local SQLite only — not available on Vercel) ─
+let db = null;
+try {
+  const Database = require('better-sqlite3');
+  db = new Database(path.join(__dirname, 'agsr.db'));
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS enquiries (
-    id         INTEGER PRIMARY KEY AUTOINCREMENT,
-    name       TEXT NOT NULL,
-    phone      TEXT NOT NULL,
-    age_group  TEXT,
-    discipline TEXT,
-    message    TEXT,
-    created_at DATETIME DEFAULT (datetime('now','localtime')),
-    status     TEXT DEFAULT 'new'
-  );
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS enquiries (
+      id         INTEGER PRIMARY KEY AUTOINCREMENT,
+      name       TEXT NOT NULL,
+      phone      TEXT NOT NULL,
+      age_group  TEXT,
+      discipline TEXT,
+      message    TEXT,
+      created_at DATETIME DEFAULT (datetime('now','localtime')),
+      status     TEXT DEFAULT 'new'
+    );
 
-  CREATE TABLE IF NOT EXISTS gallery (
-    id         INTEGER PRIMARY KEY AUTOINCREMENT,
-    filename   TEXT NOT NULL,
-    caption    TEXT,
-    category   TEXT DEFAULT 'general',
-    created_at DATETIME DEFAULT (datetime('now','localtime'))
-  );
+    CREATE TABLE IF NOT EXISTS gallery (
+      id         INTEGER PRIMARY KEY AUTOINCREMENT,
+      filename   TEXT NOT NULL,
+      caption    TEXT,
+      category   TEXT DEFAULT 'general',
+      created_at DATETIME DEFAULT (datetime('now','localtime'))
+    );
 
-  CREATE TABLE IF NOT EXISTS achievements (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    title       TEXT NOT NULL,
-    description TEXT,
-    date        TEXT,
-    filename    TEXT,
-    level       TEXT,
-    created_at  DATETIME DEFAULT (datetime('now','localtime'))
-  );
+    CREATE TABLE IF NOT EXISTS achievements (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      title       TEXT NOT NULL,
+      description TEXT,
+      date        TEXT,
+      filename    TEXT,
+      level       TEXT,
+      created_at  DATETIME DEFAULT (datetime('now','localtime'))
+    );
 
-  CREATE TABLE IF NOT EXISTS blog_posts (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    title       TEXT NOT NULL,
-    slug        TEXT UNIQUE NOT NULL,
-    excerpt     TEXT,
-    content     TEXT,
-    cover_image TEXT,
-    category    TEXT DEFAULT 'general',
-    tags        TEXT,
-    author      TEXT DEFAULT 'AGSR Team',
-    published   INTEGER DEFAULT 0,
-    created_at  DATETIME DEFAULT (datetime('now','localtime')),
-    updated_at  DATETIME DEFAULT (datetime('now','localtime'))
-  );
-`);
+    CREATE TABLE IF NOT EXISTS blog_posts (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      title       TEXT NOT NULL,
+      slug        TEXT UNIQUE NOT NULL,
+      excerpt     TEXT,
+      content     TEXT,
+      cover_image TEXT,
+      category    TEXT DEFAULT 'general',
+      tags        TEXT,
+      author      TEXT DEFAULT 'AGSR Team',
+      published   INTEGER DEFAULT 0,
+      created_at  DATETIME DEFAULT (datetime('now','localtime')),
+      updated_at  DATETIME DEFAULT (datetime('now','localtime'))
+    );
+  `);
+  console.log('✅ SQLite database ready');
+} catch (e) {
+  console.log('ℹ️  SQLite not available — API routes handled by api/payload.js on Vercel');
+}
 
 // ── Admin password (change this!) ────────────────────────────
 const ADMIN_PASS = 'agsr2024';
@@ -84,6 +90,7 @@ app.get('/admin', (req, res) => {
 
 // ── API: Submit Enquiry ───────────────────────────────────────
 app.post('/api/enquiry', (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS API on Vercel.' });
   try {
     const { name, phone, age_group, discipline, message } = req.body;
 
@@ -112,6 +119,7 @@ app.post('/api/enquiry', (req, res) => {
 
 // ── API: Admin Login ──────────────────────────────────────────
 app.post('/api/admin/login', (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS admin on Vercel.' });
   const { password } = req.body;
   if (password === ADMIN_PASS) {
     res.json({ success: true, token: Buffer.from(ADMIN_PASS).toString('base64') });
@@ -130,12 +138,14 @@ function authAdmin(req, res, next) {
 
 // ── API: Get All Enquiries (Admin) ────────────────────────────
 app.get('/api/admin/enquiries', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   const rows = db.prepare(`SELECT * FROM enquiries ORDER BY created_at DESC`).all();
   res.json({ success: true, data: rows, total: rows.length });
 });
 
 // ── API: Update Enquiry Status ────────────────────────────────
 app.patch('/api/admin/enquiries/:id', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   const { status } = req.body;
   const { id } = req.params;
   db.prepare('UPDATE enquiries SET status = ? WHERE id = ?').run(status, id);
@@ -144,12 +154,14 @@ app.patch('/api/admin/enquiries/:id', authAdmin, (req, res) => {
 
 // ── API: Delete Enquiry ───────────────────────────────────────
 app.delete('/api/admin/enquiries/:id', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   db.prepare('DELETE FROM enquiries WHERE id = ?').run(req.params.id);
   res.json({ success: true, message: 'Enquiry deleted.' });
 });
 
 // ── API: Stats (Admin Dashboard) ─────────────────────────────
 app.get('/api/admin/stats', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   const total    = db.prepare(`SELECT COUNT(*) as n FROM enquiries`).get().n;
   const newQ     = db.prepare(`SELECT COUNT(*) as n FROM enquiries WHERE status='new'`).get().n;
   const followed = db.prepare(`SELECT COUNT(*) as n FROM enquiries WHERE status='followed'`).get().n;
@@ -160,12 +172,14 @@ app.get('/api/admin/stats', authAdmin, (req, res) => {
 
 // ── API: Achievements (public) ────────────────────────────────
 app.get('/api/achievements', (req, res) => {
+  if (!db) return res.json({ success: true, data: [] });
   const rows = db.prepare(`SELECT * FROM achievements ORDER BY created_at DESC`).all();
   res.json({ success: true, data: rows });
 });
 
 // ── API: Add Achievement (admin) ─────────────────────────────
 app.post('/api/admin/achievements', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   const { title, description, date, filename, level } = req.body;
   const result = db.prepare(`
     INSERT INTO achievements (title, description, date, filename, level)
@@ -178,6 +192,7 @@ app.post('/api/admin/achievements', authAdmin, (req, res) => {
 
 // GET all published posts (public)
 app.get('/api/blog', (req, res) => {
+  if (!db) return res.json({ success: true, data: [], total: 0 });
   const { category, limit = 20, offset = 0 } = req.query;
   let query = `SELECT id, title, slug, excerpt, cover_image, category, tags, author, created_at
                FROM blog_posts WHERE published = 1`;
@@ -195,6 +210,7 @@ app.get('/api/blog', (req, res) => {
 
 // GET single post by slug (public)
 app.get('/api/blog/:slug', (req, res) => {
+  if (!db) return res.status(404).json({ success: false, message: 'Post not found.' });
   const row = db.prepare(
     `SELECT * FROM blog_posts WHERE slug = ? AND published = 1`
   ).get(req.params.slug);
@@ -204,12 +220,14 @@ app.get('/api/blog/:slug', (req, res) => {
 
 // GET all posts including drafts (admin)
 app.get('/api/admin/blog', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   const rows = db.prepare(`SELECT * FROM blog_posts ORDER BY created_at DESC`).all();
   res.json({ success: true, data: rows, total: rows.length });
 });
 
 // POST create new post (admin)
 app.post('/api/admin/blog', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   const { title, slug, excerpt, content, cover_image, category, tags, author, published } = req.body;
   if (!title || !slug) return res.status(400).json({ success: false, message: 'Title and slug required.' });
   try {
@@ -225,6 +243,7 @@ app.post('/api/admin/blog', authAdmin, (req, res) => {
 
 // PATCH update post (admin)
 app.patch('/api/admin/blog/:id', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   const fields = ['title', 'slug', 'excerpt', 'content', 'cover_image', 'category', 'tags', 'author', 'published'];
   const updates = [];
   const params = [];
@@ -243,6 +262,7 @@ app.patch('/api/admin/blog/:id', authAdmin, (req, res) => {
 
 // DELETE post (admin)
 app.delete('/api/admin/blog/:id', authAdmin, (req, res) => {
+  if (!db) return res.status(503).json({ success: false, message: 'Use Payload CMS on Vercel.' });
   db.prepare('DELETE FROM blog_posts WHERE id = ?').run(req.params.id);
   res.json({ success: true, message: 'Post deleted.' });
 });
