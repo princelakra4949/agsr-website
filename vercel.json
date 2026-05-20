@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "outputDirectory": ".",
   "functions": {
     "api/payload.js": {
       "maxDuration": 30,
@@ -11,4 +10,6 @@
     { "source": "/api/:path*", "destination": "/api/payload" },
     { "source": "/admin/:path*", "destination": "/api/payload" },
     { "source": "/admin", "destination": "/api/payload" },
-    { "source": "/media/:path*", "destination
+    { "source": "/media/:path*", "destination": "/api/payload" }
+  ]
+}
