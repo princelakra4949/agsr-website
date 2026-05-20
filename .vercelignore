@@ -1,7 +1,0 @@
-# server.js is for local development only (uses better-sqlite3 which isn't on Vercel)
-# Vercel uses api/payload.js as the serverless handler instead
-server.js
-
-# Local dev database
-agsr.db
-*.db
