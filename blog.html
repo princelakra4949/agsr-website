@@ -814,18 +814,26 @@
 
   /* ── Fetch posts ── */
   async function loadPosts() {
+    // Show seed posts immediately so the page is never blank
+    allPosts = SEED_POSTS;
+    renderPosts();
+
+    // Then try to fetch live data from the API with a 5-second timeout
     try {
-      const res = await fetch('/api/blog?limit=50');
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 5000);
+      const res = await fetch('/api/blog?limit=50', { signal: controller.signal });
+      clearTimeout(timer);
       if (res.ok) {
         const data = await res.json();
-        allPosts = data.data.length ? data.data : SEED_POSTS;
-      } else {
-        allPosts = SEED_POSTS;
+        if (data.data && data.data.length) {
+          allPosts = data.data;
+          renderPosts();
+        }
       }
     } catch {
-      allPosts = SEED_POSTS;
+      // API unavailable — seed posts already displayed, nothing to do
     }
-    renderPosts();
   }
 
   /* ── Render posts ── */
