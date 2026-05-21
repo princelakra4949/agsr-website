@@ -623,20 +623,38 @@ const slug   = params.get('slug') || '';
 
 /* ── Load post ── */
 async function loadPost() {
-  let post = null;
+  // Show seed post immediately if available — no waiting for the API
+  if (SEED_POSTS[slug]) {
+    const seedPost = { ...SEED_POSTS[slug], slug, published: 1 };
+    document.getElementById('loadingState').style.display = 'none';
+    renderPost(seedPost);
 
+    // Then silently try the API in the background with a 5-second timeout
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 5000);
+      const res = await fetch(`/api/blog/${slug}`, { signal: controller.signal });
+      clearTimeout(timer);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.data) renderPost(data.data);
+      }
+    } catch {}
+    return;
+  }
+
+  // Slug not in seed — try API (unknown/future posts)
+  let post = null;
   try {
-    const res = await fetch(`/api/blog/${slug}`);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch(`/api/blog/${slug}`, { signal: controller.signal });
+    clearTimeout(timer);
     if (res.ok) {
       const data = await res.json();
       post = data.data;
     }
   } catch {}
-
-  // Fallback to seed data
-  if (!post && SEED_POSTS[slug]) {
-    post = { ...SEED_POSTS[slug], slug, published: 1 };
-  }
 
   document.getElementById('loadingState').style.display = 'none';
 
