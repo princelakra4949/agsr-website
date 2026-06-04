@@ -1,6 +1,5 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -18,7 +17,6 @@ export default buildConfig({
     user: Users.slug,
     meta: {
       titleSuffix: '— AGSR Admin',
-      favicon: '/agsr-logo.jpg',
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -38,16 +36,6 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-
-  plugins: [
-    vercelBlobStorage({
-      enabled: !!process.env.BLOB_READ_WRITE_TOKEN,
-      collections: {
-        media: true,
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
-  ],
 
   cors: [
     'https://agsrsonipat.in',
