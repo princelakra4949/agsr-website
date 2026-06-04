@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/jpeg" href="agsr-logo.jpg" />
+  <link rel="apple-touch-icon" href="agsr-logo.jpg" />
   <title>Blog | AGSR Sonipat — Shooting Tips, News & Academy Updates</title>
   <meta name="description" content="Shooting tips, training advice, NRAI news, and AGSR academy updates. Your resource for becoming a better shooter in India." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -557,7 +559,7 @@
     </ul>
     <div class="nav-cta">
       <a href="contact.html" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Enroll Now</a>
-      <a href="https://wa.me/919306521724" target="_blank" class="nav-wa">
+      <a href="https://wa.me/917720834506" target="_blank" class="nav-wa">
         <span>💬</span> WhatsApp
       </a>
     </div>
@@ -574,7 +576,7 @@
   <a href="offer.html" onclick="toggleMenu()">Our Offer</a>
   <a href="blog.html" class="active" onclick="toggleMenu()">Blog</a>
   <a href="contact.html" onclick="toggleMenu()">Contact Us</a>
-  <a href="https://wa.me/919306521724" target="_blank">💬 WhatsApp Us</a>
+  <a href="https://wa.me/917720834506" target="_blank">💬 WhatsApp Us</a>
 </div>
 
 <!-- ============================================================
@@ -610,7 +612,7 @@
       Practical shooting guides, mental focus tips, NRAI news, equipment reviews, and updates straight from the AGSR Sonipat coaching team.
     </p>
     <div class="hero-buttons">
-      <a href="https://wa.me/919306521724?text=Hi!%20I%20am%20interested%20in%20joining%20AGSR%20Sonipat%20Shooting%20Academy" target="_blank" class="btn btn-primary">🎯 Join the Academy</a>
+      <a href="https://wa.me/917720834506?text=Hi!%20I%20am%20interested%20in%20joining%20AGSR%20Sonipat%20Shooting%20Academy" target="_blank" class="btn btn-primary">🎯 Join the Academy</a>
       <a href="index.html#disciplines" class="btn btn-outline">View Disciplines</a>
     </div>
   </div>
@@ -693,7 +695,7 @@
       <h3>Get Shooting Tips in Your WhatsApp</h3>
       <p>Join 200+ shooters already in our AGSR Tips community. Get weekly training tips, news and academy updates delivered directly to your WhatsApp.</p>
       <div class="nl-form">
-        <a href="https://wa.me/919306521724?text=Hi%20AGSR%2C%20please%20add%20me%20to%20your%20shooting%20tips%20WhatsApp%20group."
+        <a href="https://wa.me/917720834506?text=Hi%20AGSR%2C%20please%20add%20me%20to%20your%20shooting%20tips%20WhatsApp%20group."
            target="_blank" class="btn btn-gold" style="width:100%;justify-content:center">
           💬 Join WhatsApp Group
         </a>
@@ -715,8 +717,8 @@
         </div>
         <p>Aryan Gateways Shooting Range — Sonipat's premier shooting academy delivering ISSF-standard Olympic training since 2016. Making shooting accessible and affordable for everyone.</p>
         <div class="footer-socials">
-          <a href="https://wa.me/919306521724" target="_blank" class="footer-social-btn" title="WhatsApp">💬</a>
-          <a href="tel:+919306521724" class="footer-social-btn" title="Call">📞</a>
+          <a href="https://wa.me/917720834506" target="_blank" class="footer-social-btn" title="WhatsApp">💬</a>
+          <a href="tel:+917720834506" class="footer-social-btn" title="Call">📞</a>
           <a href="mailto:agsr.sonipat@gmail.com" class="footer-social-btn" title="Email">✉️</a>
         </div>
       </div>
@@ -744,7 +746,7 @@
         <h4>Contact</h4>
         <p class="fc-info">
           <strong>📞 Call / WhatsApp</strong><br>
-          +91 93065 21724<br><br>
+          +91 77208 34506<br><br>
           <strong>📍 Location</strong><br>
           Sonipat, Haryana<br>India<br><br>
           <strong>🕐 Hours</strong><br>
@@ -764,7 +766,7 @@
 </footer>
 
 <!-- WhatsApp Floating Button -->
-<a href="https://wa.me/919306521724?text=Hi%20AGSR!%20I%20want%20to%20know%20more%20about%20joining%20your%20shooting%20academy." target="_blank" class="wa-float">
+<a href="https://wa.me/917720834506?text=Hi%20AGSR!%20I%20want%20to%20know%20more%20about%20joining%20your%20shooting%20academy." target="_blank" class="wa-float">
   💬
   <span class="wa-tooltip">Chat with us!</span>
 </a>
@@ -814,18 +816,26 @@
 
   /* ── Fetch posts ── */
   async function loadPosts() {
+    // Show seed posts immediately so the page is never blank
+    allPosts = SEED_POSTS;
+    renderPosts();
+
+    // Then try to fetch live data from the API with a 5-second timeout
     try {
-      const res = await fetch('/api/blog?limit=50');
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 5000);
+      const res = await fetch('/api/blog?limit=50', { signal: controller.signal });
+      clearTimeout(timer);
       if (res.ok) {
         const data = await res.json();
-        allPosts = data.data.length ? data.data : SEED_POSTS;
-      } else {
-        allPosts = SEED_POSTS;
+        if (data.data && data.data.length) {
+          allPosts = data.data;
+          renderPosts();
+        }
       }
     } catch {
-      allPosts = SEED_POSTS;
+      // API unavailable — seed posts already displayed, nothing to do
     }
-    renderPosts();
   }
 
   /* ── Render posts ── */
