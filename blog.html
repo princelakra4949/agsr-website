@@ -824,12 +824,20 @@
     try {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 5000);
-      const res = await fetch('/api/blog?limit=50', { signal: controller.signal });
+      const res = await fetch('https://agsr-cms.vercel.app/api/blog-posts?where[status][equals]=published&limit=50&depth=1', { signal: controller.signal });
       clearTimeout(timer);
       if (res.ok) {
         const data = await res.json();
-        if (data.data && data.data.length) {
-          allPosts = data.data;
+        if (data.docs && data.docs.length) {
+          allPosts = data.docs.map(doc => ({
+            title: doc.title,
+            slug: doc.slug,
+            excerpt: doc.excerpt || '',
+            cover_image: doc.featuredImage?.url || null,
+            category: doc.category || 'academy-news',
+            created_at: doc.publishedAt || doc.createdAt,
+            author: doc.author?.name || 'AGSR Team',
+          }));
           renderPosts();
         }
       }

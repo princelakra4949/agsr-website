@@ -1192,10 +1192,18 @@
     btn.disabled = true;
 
     try {
-      await fetch('/api/enquiry', {
+      await fetch('https://agsr-cms.vercel.app/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, age, discipline: disc + (level ? ' | ' + level : '') + (batch ? ' | Batch: ' + batch : ''), message })
+        body: JSON.stringify({
+          name,
+          phone,
+          age: age ? parseInt(age) : undefined,
+          discipline: disc || undefined,
+          experienceLevel: level || undefined,
+          preferredBatch: batch || undefined,
+          message: message || undefined,
+        })
       });
     } catch (_) {}
 
