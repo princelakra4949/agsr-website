@@ -2,7 +2,4 @@ import { withPayload } from '@payloadcms/next/withPayload'
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  // your Next.js config here
-}
-
-export default withPayload(nextConfig)
+  serverExternalPackages: ['sharp', 'mongoose', '@payloadcms/db-mongodb'
