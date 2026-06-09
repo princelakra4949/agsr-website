@@ -3,6 +3,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
+import sharp from 'sharp'
 
 import { BlogPosts } from './collections/BlogPosts'
 import { Enquiries } from './collections/Enquiries'
@@ -37,6 +38,8 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
 
+  sharp,
+
   cors: [
     'https://agsrsonipat.in',
     'https://www.agsrsonipat.in',
@@ -46,6 +49,4 @@ export default buildConfig({
   csrf: [
     'https://agsrsonipat.in',
     'https://www.agsrsonipat.in',
-    process.env.NEXT_PUBLIC_SERVER_URL || '',
-  ].filter(Boolean),
-})
+    process.env.NEXT_PUBLIC_SERVER
