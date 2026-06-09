@@ -29,4 +29,7 @@
     "@types/react-dom": "19.2.3",
     "typescript": "^5.4.0"
   },
-  "engin
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}
