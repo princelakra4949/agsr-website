@@ -49,4 +49,6 @@ export default buildConfig({
   csrf: [
     'https://agsrsonipat.in',
     'https://www.agsrsonipat.in',
-    process.env.NEXT_PUBLIC_SERVER
+    process.env.NEXT_PUBLIC_SERVER_URL || '',
+  ].filter(Boolean),
+})
