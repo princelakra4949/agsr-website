@@ -1224,12 +1224,8 @@
       });
     } catch (_) {}
 
-    document.getElementById('formWrap').style.display    = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-    document.getElementById('successName').textContent   = name;
-
-    const msg = `Hi AGSR, I'm ${name} (${phone}). I just submitted an enquiry for ${disc || 'shooting training'}${batch ? ' — preferred batch: ' + batch : ''}. Please confirm.`;
-    setTimeout(() => window.open('https://wa.me/917720834506?text=' + encodeURIComponent(msg), '_blank'), 1400);
+        const msg = `Hi AGSR, I'm ${name} (${phone}). I just submitted an enquiry for ${disc || 'shooting training'}${batch ? ' — preferred batch: ' + batch : ''}. Please confirm.`;
+    window.location.href = 'thank-you.html?name=' + encodeURIComponent(name) + '&wa=' + encodeURIComponent(msg);
   });
 </script>
 
