@@ -11,7 +11,7 @@ rm -rf public
 mkdir -p public
 
 # ── HTML pages ──────────────────────────────────────────────────
-cp index.html about.html blog.html blog-post.html contact.html offer.html public/
+cp index.html about.html blog.html blog-post.html contact.html offer.html thank-you.html public/
 # admin.html is the old SQLite admin - skip it (use /admin for Payload CMS)
 
 # ── CSS ─────────────────────────────────────────────────────────
