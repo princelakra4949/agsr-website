@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2046423412639245');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2046423412639245&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/jpeg" href="agsr-logo.jpg" />
+  <link rel="apple-touch-icon" href="agsr-logo.jpg" />
+  <title>Thank You | AGSR Sonipat — Aryan Gateways Shooting Range</title>
+  <meta name="description" content="Thank you for your enquiry to AGSR Sonipat. Our team will contact you within 24 hours." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & ROOT VARIABLES (matches site-wide design system)
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --olive:   #3d5a2a;
+      --olive-dk:#2a3f1c;
+      --olive-lt:#567a3a;
+      --black:   #0d0d0d;
+      --dark:    #141414;
+      --card-bg: #1c1c1c;
+      --red:     #e63322;
+      --red-lt:  #ff4433;
+      --gold:    #f5c518;
+      --gold-lt: #ffd740;
+      --white:   #ffffff;
+      --grey:    #aaaaaa;
+      --radius:  12px;
+      --shadow:  0 8px 32px rgba(0,0,0,0.45);
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--olive); border-radius: 3px; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 4px;
+      font-family: 'Oswald', sans-serif; font-size: 15px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      font-weight: 600; cursor: pointer; border: none;
+      transition: var(--transition);
+    }
+    .btn-primary { background: var(--red); color: var(--white); }
+    .btn-primary:hover { background: var(--red-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,51,34,0.4); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: var(--black); }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,197,24,0.4); }
+
+    /* NAVBAR */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0 24px; transition: var(--transition); }
+    #navbar.scrolled { background: rgba(13,13,13,0.97); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.6); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 48px; width: 48px; object-fit: contain; border-radius: 50%; }
+    .nav-logo-text .name { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+    .nav-logo-text .name span { color: var(--gold); }
+    .nav-logo-text .sub { font-size: 10px; letter-spacing: 3px; color: var(--grey); text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.75); transition: var(--transition); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: var(--transition); }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--gold); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .nav-wa { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: #25D366; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; transition: var(--transition); }
+    .nav-wa:hover { background: #20bf5b; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: var(--transition); }
+    .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: rgba(13,13,13,0.98); backdrop-filter: blur(12px); padding: 24px; flex-direction: column; gap: 20px; border-top: 1px solid rgba(255,255,255,0.08); z-index: 999; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Oswald', sans-serif; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.8); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); transition: var(--transition); }
+    .mobile-menu a:hover, .mobile-menu a.active { color: var(--gold); }
+
+    /* HERO / THANK YOU SECTION */
+    #hero { position: relative; min-height: 78vh; display: flex; align-items: center; background: var(--black); overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0d0d0d 0%, #1a2a10 50%, #0d0d0d 100%); }
+    .crosshair-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; overflow: hidden; }
+    .crosshair-svg { width: 60vw; max-width: 750px; opacity: 0.10; animation: rotateSlow 60s linear infinite; transform-origin: center; }
+    @keyframes rotateSlow { to { transform: rotate(360deg); } }
+    .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0.95) 75%); }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; padding: 150px 24px 80px; width: 100%; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(61,90,42,0.3); border: 1px solid rgba(61,90,42,0.6); padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #8db86a; margin-bottom: 28px; }
+    .hero-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8db86a; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    .hero-title { font-family: 'Oswald', sans-serif; font-size: clamp(2.6rem, 5.5vw, 4.6rem); font-weight: 700; line-height: 1.05; margin-bottom: 8px; }
+    .hero-title .line1 { color: var(--white); }
+    .hero-title .line2 { color: var(--gold); }
+    .hero-tagline { font-family: 'Oswald', sans-serif; font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin: 20px 0 16px; }
+    .hero-desc { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.65); max-width: 540px; margin: 0 auto 40px; }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 44px; }
+
+    .success-ring { width: 100px; height: 100px; border-radius: 50%; border: 2px solid rgba(37,211,102,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; position: relative; animation: success-pulse 2s ease-in-out infinite; }
+    .success-ring::before { content: ''; position: absolute; inset: 8px; border-radius: 50%; background: rgba(37,211,102,0.08); }
+    .success-check { font-size: 42px; position: relative; z-index: 1; }
+    @keyframes success-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.2); } 50% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } }
+
+    .next-steps { text-align: left; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 28px 30px; margin: 0 auto 44px; max-width: 560px; }
+    .next-steps h2 { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .ns-step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .ns-step:last-child { margin-bottom: 0; }
+    .ns-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: rgba(245,197,24,0.12); color: var(--gold); border: 1px solid rgba(245,197,24,0.25); font-size: 12px; font-weight: 700; font-family: 'Oswald', sans-serif; display: flex; align-items: center; justify-content: center; }
+
+    .badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .affil-badge { padding: 6px 14px; border-radius: 50px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.4); text-transform: uppercase; font-family: 'Oswald', sans-serif; }
+
+    /* FOOTER */
+    footer { background: #080808; border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 60px; }
+    .footer-brand .logo-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-brand .logo-wrap img { height: 52px; width: 52px; object-fit: contain; border-radius: 50%; }
+    .footer-brand .logo-name { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; line-height: 1.2; }
+    .footer-brand .logo-name span { color: var(--gold); }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; margin-bottom: 24px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social-btn { width: 38px; height: 38px; background: rgba(255,255,255,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: var(--transition); }
+    .footer-social-btn:hover { background: var(--olive); }
+    .footer-col h4 { font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.45); transition: var(--transition); }
+    .footer-col ul li a:hover { color: var(--white); padding-left: 4px; }
+    .footer-col .fc-info { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+    .footer-col .fc-info strong { color: rgba(255,255,255,0.7); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .footer-bottom .affil { display: flex; align-items: center; gap: 16px; }
+
+    /* WHATSAPP FLOAT */
+    .wa-float { position: fixed; bottom: 32px; right: 32px; z-index: 999; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 8px 24px rgba(37,211,102,0.45); transition: var(--transition); animation: waPulse 3s infinite; }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,0.6); animation: none; }
+    @keyframes waPulse { 0%,100%{box-shadow:0 8px 24px rgba(37,211,102,0.45)} 50%{box-shadow:0 8px 32px rgba(37,211,102,0.7),0 0 0 8px rgba(37,211,102,0.15)} }
+    .wa-tooltip { position: absolute; right: 72px; top: 50%; transform: translateY(-50%); background: #0d0d0d; color: white; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: var(--transition); }
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.4rem; }
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .btn { width: 100%; justify-content: center; }
+      .next-steps { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'" />
+      <div class="nav-logo-text">
+        <div class="name"><span>AG</span>SR Sonipat</div>
+        <div class="sub">Shooting Academy</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="offer.html">Our Offer</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Enroll Now</a>
+      <a href="https://wa.me/917720834506" target="_blank" class="nav-wa"><span>💬</span> WhatsApp</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" onclick="toggleMenu()">About Us</a>
+  <a href="offer.html" onclick="toggleMenu()">Our Offer</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact Us</a>
+  <a href="https://wa.me/917720834506" target="_blank">💬 WhatsApp Us</a>
+</div>
+
+<!-- THANK YOU HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="crosshair-bg">
+    <svg class="crosshair-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="250" cy="250" r="240" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="190" fill="none" stroke="#e63322" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="140" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="90"  fill="none" stroke="#e63322" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="40"  fill="none" stroke="#ffffff" stroke-width="1.5"/>
+      <line x1="250" y1="0" x2="250" y2="500" stroke="#ffffff" stroke-width="1.5"/>
+      <line x1="0" y1="250" x2="500" y2="250" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="8" fill="#e63322"/>
+      <line x1="250" y1="5"   x2="250" y2="20"  stroke="#ffffff" stroke-width="2"/>
+      <line x1="250" y1="480" x2="250" y2="495" stroke="#ffffff" stroke-width="2"/>
+      <line x1="5"   y1="250" x2="20"  y2="250" stroke="#ffffff" stroke-width="2"/>
+      <line x1="480" y1="250" x2="495" y2="250" stroke="#ffffff" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="success-ring"><span class="success-check">✅</span></div>
+    <div class="hero-badge">🎯 Enquiry Received</div>
+    <h1 class="hero-title">
+      <div class="line1">THANK YOU<span id="tyNameSuffix"></span></div>
+      <div class="line2">We've Got Your Message</div>
+    </h1>
+    <p class="hero-tagline">Your Journey · <span style="color:var(--gold);font-weight:600">Starts Here</span></p>
+    <p class="hero-desc">Your enquiry has landed safely with the AGSR Sonipat team. <strong style="color:var(--white)">We'll reach out within 24 hours</strong> — usually much sooner.</p>
+
+    <div class="next-steps">
+      <h2>What Happens Next</h2>
+      <div class="ns-step"><span class="ns-num">1</span><span>Our coaching team reviews your enquiry and preferred discipline.</span></div>
+      <div class="ns-step"><span class="ns-num">2</span><span>We call or WhatsApp you to confirm batch timing and answer questions.</span></div>
+      <div class="ns-step"><span class="ns-num">3</span><span>You visit the range at Saipuram, Kabirpur, Sonipat for a free first session.</span></div>
+    </div>
+
+    <div class="hero-buttons">
+      <a id="waContinueBtn" href="https://wa.me/917720834506?text=Hi%20AGSR%2C%20I%20just%20submitted%20an%20enquiry%20on%20your%20website.%20Please%20confirm." target="_blank" class="btn btn-primary">💬 Continue on WhatsApp</a>
+      <a href="tel:+917720834506" class="btn btn-outline">📞 Call Us Now</a>
+      <a href="index.html" class="btn btn-gold">🏠 Back to Home</a>
+    </div>
+
+    <div class="badges">
+      <span class="affil-badge">NRAI Affiliated</span>
+      <span class="affil-badge">Haryana Rifle Assoc.</span>
+      <span class="affil-badge">ISSF Standard</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <img src="agsr-logo.jpg" alt="AGSR Logo" onerror="this.style.display='none'" />
+          <div class="logo-name"><span>AG</span>SR Sonipat<br><small style="font-size:12px;color:var(--grey);font-weight:400;letter-spacing:2px">SHOOTING RANGE</small></div>
+        </div>
+        <p>Aryan Gateways Shooting Range — Sonipat's premier shooting academy delivering ISSF-standard Olympic training since 2016. Making shooting accessible and affordable for everyone.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/917720834506" target="_blank" class="footer-social-btn" title="WhatsApp">💬</a>
+          <a href="tel:+917720834506" class="footer-social-btn" title="Call">📞</a>
+          <a href="mailto:agsr.sonipat@gmail.com" class="footer-social-btn" title="Email">✉️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="offer.html">Our Offer</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Disciplines</h4>
+        <ul>
+          <li><a href="offer.html">10m Air Pistol</a></li>
+          <li><a href="offer.html">10m Air Rifle</a></li>
+          <li><a href="offer.html">25m Pistol</a></li>
+          <li><a href="offer.html">50m Free Pistol</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="fc-info">
+          <strong>📞 Call / WhatsApp</strong><br>
+          +91 77208 34506<br><br>
+          <strong>📍 Location</strong><br>
+          Sonipat, Haryana<br>India<br><br>
+          <strong>🕐 Hours</strong><br>
+          Open Daily<br>Morning &amp; Evening Batches
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Aryan Gateways Shooting Range, Sonipat. All rights reserved.</p>
+      <div class="affil">
+        <span class="affil-badge">NRAI Affiliated</span>
+        <span class="affil-badge">Haryana Rifle Assoc.</span>
+        <span class="affil-badge">ISSF Standard</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/917720834506?text=Hi%20AGSR!%20I%20want%20to%20know%20more%20about%20joining%20your%20shooting%20academy." target="_blank" class="wa-float">
+  💬
+  <span class="wa-tooltip">Chat with us!</span>
+</a>
+
+<script>
+  /* Navbar scroll */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  /* Mobile menu */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  document.addEventListener('click', e => {
+    const menu = document.getElementById('mobileMenu');
+    const ham  = document.querySelector('.hamburger');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !ham.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  /* Personalize from query params passed by contact.html on redirect */
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get('name');
+  const waMsg = params.get('wa');
+  if (name) {
+    document.getElementById('tyNameSuffix').textContent = ', ' + name;
+  }
+  if (waMsg) {
+    document.getElementById('waContinueBtn').href = 'https://wa.me/917720834506?text=' + encodeURIComponent(waMsg);
+  }
+</script>
+
+</body>
+</html>
