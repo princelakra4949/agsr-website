@@ -94,6 +94,12 @@ export const Enquiries: CollectionConfig = {
   hooks: {
     afterChange: [
       async ({ doc, operation, req }) => {
+        // Diagnostic: always log so we can see in Vercel Logs whether this hook
+        // runs at all, and whether the env vars are actually present at runtime.
+        req.payload.logger.info(
+          `[enquiry-hook] operation=${operation} notifyTo=${process.env.ENQUIRY_NOTIFY_EMAIL || 'MISSING'} hasApiKey=${!!process.env.RESEND_API_KEY} fromAddr=${process.env.RESEND_FROM_ADDRESS || 'MISSING'}`
+        )
+
         // Only notify on brand-new enquiries, not on edits made in the admin panel
         if (operation !== 'create') return
 
