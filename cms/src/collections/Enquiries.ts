@@ -91,4 +91,37 @@ export const Enquiries: CollectionConfig = {
     },
   ],
   timestamps: true,
+  hooks: {
+    afterChange: [
+      async ({ doc, operation, req }) => {
+        // Only notify on brand-new enquiries, not on edits made in the admin panel
+        if (operation !== 'create') return
+
+        const notifyTo = process.env.ENQUIRY_NOTIFY_EMAIL
+        if (!notifyTo) return
+
+        try {
+          await req.payload.sendEmail({
+            to: notifyTo,
+            subject: `New Enquiry: ${doc.name} (${doc.phone})`,
+            html: `
+              <h2>New enquiry from AGSR website</h2>
+              <p><strong>Name:</strong> ${doc.name}</p>
+              <p><strong>Phone:</strong> ${doc.phone}</p>
+              ${doc.email ? `<p><strong>Email:</strong> ${doc.email}</p>` : ''}
+              ${doc.age ? `<p><strong>Age:</strong> ${doc.age}</p>` : ''}
+              ${doc.discipline ? `<p><strong>Discipline:</strong> ${doc.discipline}</p>` : ''}
+              ${doc.experienceLevel ? `<p><strong>Experience:</strong> ${doc.experienceLevel}</p>` : ''}
+              ${doc.preferredBatch ? `<p><strong>Preferred Batch:</strong> ${doc.preferredBatch}</p>` : ''}
+              ${doc.message ? `<p><strong>Message:</strong> ${doc.message}</p>` : ''}
+              <p><a href="${process.env.NEXT_PUBLIC_SERVER_URL || ''}/admin/collections/enquiries/${doc.id}">View in Admin</a></p>
+            `,
+          })
+        } catch (err) {
+          // Never let an email failure block the enquiry from being saved
+          req.payload.logger.error(`Failed to send enquiry notification email: ${err}`)
+        }
+      },
+    ],
+  },
 }

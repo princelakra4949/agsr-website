@@ -1,4 +1,5 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -27,6 +28,12 @@ export default buildConfig({
   collections: [Users, BlogPosts, Media, Enquiries],
 
   editor: lexicalEditor(),
+
+  email: resendAdapter({
+    defaultFromAddress: process.env.RESEND_FROM_ADDRESS || 'onboarding@resend.dev',
+    defaultFromName: 'AGSR Sonipat',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
 
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret-change-me',
 
