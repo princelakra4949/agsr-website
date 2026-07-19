@@ -38,21 +38,25 @@ export const Enquiries: CollectionConfig = {
     {
       name: 'discipline',
       type: 'select',
+      // NOTE: values must match the <select id="f-disc"> options in contact.html exactly,
+      // or Payload rejects the submission with a 400 and the enquiry never saves.
       options: [
-        { label: '10m Air Pistol', value: 'air-pistol-10m' },
-        { label: '10m Air Rifle', value: 'air-rifle-10m' },
-        { label: '25m Pistol', value: 'pistol-25m' },
-        { label: '50m Free Pistol', value: 'free-pistol-50m' },
-        { label: 'Not Sure Yet', value: 'undecided' },
+        { label: '10m Air Pistol', value: '10m-air-pistol' },
+        { label: '10m Air Rifle', value: '10m-air-rifle' },
+        { label: '25m Pistol', value: '25m-pistol' },
+        { label: '50m Free Pistol', value: '50m-free-pistol' },
+        { label: 'Not Sure Yet', value: 'not-sure' },
       ],
     },
     {
       name: 'experienceLevel',
       type: 'select',
       label: 'Experience Level',
+      // NOTE: values must match the <select id="f-level"> options in contact.html exactly.
       options: [
         { label: 'Complete Beginner', value: 'beginner' },
-        { label: 'Some Experience', value: 'intermediate' },
+        { label: 'Some Experience', value: 'some-exp' },
+        { label: 'Club Level', value: 'club-level' },
         { label: 'Competitive Shooter', value: 'competitive' },
       ],
     },
@@ -60,10 +64,13 @@ export const Enquiries: CollectionConfig = {
       name: 'preferredBatch',
       type: 'select',
       label: 'Preferred Batch',
+      // NOTE: values must match the <select id="f-batch"> options in contact.html exactly.
       options: [
         { label: 'Morning (5 AM – 8 AM)', value: 'morning' },
         { label: 'Afternoon (12 PM – 3 PM)', value: 'afternoon' },
-        { label: 'Evening (5 PM – 9 PM)', value: 'evening' },
+        { label: 'Evening (4 PM – 7 PM)', value: 'evening' },
+        { label: 'Weekend Only', value: 'weekend' },
+        { label: 'Flexible / Discuss', value: 'flexible' },
       ],
     },
     {
