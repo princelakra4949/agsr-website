@@ -1217,19 +1217,31 @@
     document.getElementById('btnSpinner').style.display = 'inline';
     btn.disabled = true;
 
+    const enquiryPayload = {
+      name,
+      phone,
+      age: age ? parseInt(age) : undefined,
+      discipline: disc || undefined,
+      experienceLevel: level || undefined,
+      preferredBatch: batch || undefined,
+      message: message || undefined,
+    };
+
     try {
       await fetch('https://agsr-cms.vercel.app/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          phone,
-          age: age ? parseInt(age) : undefined,
-          discipline: disc || undefined,
-          experienceLevel: level || undefined,
-          preferredBatch: batch || undefined,
-          message: message || undefined,
-        })
+        body: JSON.stringify(enquiryPayload)
+      });
+    } catch (_) {}
+
+    // Send the same enquiry to Zapier (Zap trigger webhook)
+    try {
+      await fetch('https://hooks.zapier.com/hooks/catch/28620224/4tw5c22/', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(enquiryPayload)
       });
     } catch (_) {}
 
