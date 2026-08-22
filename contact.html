@@ -1236,12 +1236,20 @@
     } catch (_) {}
 
     // Send the same enquiry to Zapier (Zap trigger webhook)
+    // NOTE: sent as form-urlencoded (not JSON) so Zapier's Catch Hook parses
+    // each field separately (name, phone, age, ...) instead of one JSON blob.
     try {
+      const zapierParams = new URLSearchParams();
+      Object.entries(enquiryPayload).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          zapierParams.append(key, value);
+        }
+      });
       await fetch('https://hooks.zapier.com/hooks/catch/28620224/4tw5c22/', {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(enquiryPayload)
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: zapierParams.toString()
       });
     } catch (_) {}
 
